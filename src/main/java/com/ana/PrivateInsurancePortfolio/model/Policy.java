@@ -1,10 +1,8 @@
 package com.ana.PrivateInsurancePortfolio.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -12,25 +10,37 @@ public class Policy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @Column(name = "policy_id")
+    private long policyId;
 
     private String number;
     private PolicyType policyType;
     private ObjectType objectType;
     private PolicyStatus status;
-    private Set<?> insuredObjects; //object IDs
+    @ManyToMany
+    @JoinTable(name = "policy_objects", joinColumns = @JoinColumn(name = "policy_id"),
+                inverseJoinColumns = @JoinColumn(name = "vehicle_id"))
+    private Set<Vehicle> insuredObjects; //object IDs
     private Date startDate;
     private Date endDate;
     private Double premium;
-    private int numberOfPayments;
+    private int noOfInstallments;
+
+    @OneToMany
+    @JoinColumn(name = "installment_id")
+    private List<Installment> installment;
     private PaymentStatus paymentStatus;
     private Double sumInsured;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Policy() {
     }
 
-    public Policy(long id, String number, PolicyType policyType, ObjectType objectType, PolicyStatus status, Set<?> insuredObjects, Date startDate, Date endDate, Double premium, int numberOfPayments, PaymentStatus paymentStatus, Double sumInsured) {
-        this.id = id;
+    public Policy(long policyId, String number, PolicyType policyType, ObjectType objectType, PolicyStatus status, Set<Vehicle> insuredObjects, Date startDate, Date endDate, Double premium, int noOfInstallments, List<Installment> installment, PaymentStatus paymentStatus, Double sumInsured, User user) {
+        this.policyId = policyId;
         this.number = number;
         this.policyType = policyType;
         this.objectType = objectType;
@@ -39,17 +49,20 @@ public class Policy {
         this.startDate = startDate;
         this.endDate = endDate;
         this.premium = premium;
-        this.numberOfPayments = numberOfPayments;
+        this.noOfInstallments = noOfInstallments;
+        this.installment = installment;
         this.paymentStatus = paymentStatus;
         this.sumInsured = sumInsured;
+        this.user = user;
     }
 
-    public long getId() {
-        return id;
+
+    public long getPolicyId() {
+        return policyId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setPolicyId(long policyId) {
+        this.policyId = policyId;
     }
 
     public String getNumber() {
@@ -88,7 +101,7 @@ public class Policy {
         return insuredObjects;
     }
 
-    public void setInsuredObjects(Set<?> insuredObjects) {
+    public void setInsuredObjects(Set<Vehicle> insuredObjects) {
         this.insuredObjects = insuredObjects;
     }
 
@@ -116,12 +129,12 @@ public class Policy {
         this.premium = premium;
     }
 
-    public int getNumberOfPayments() {
-        return numberOfPayments;
+    public int getNoOfInstallments() {
+        return noOfInstallments;
     }
 
-    public void setNumberOfPayments(int numberOfPayments) {
-        this.numberOfPayments = numberOfPayments;
+    public void setNoOfInstallments(int noOfInstallments) {
+        this.noOfInstallments = noOfInstallments;
     }
 
     public PaymentStatus getPaymentStatus() {
@@ -138,5 +151,55 @@ public class Policy {
 
     public void setSumInsured(Double sumInsured) {
         this.sumInsured = sumInsured;
+    }
+
+    public List<Installment> getInstallment() {
+        return installment;
+    }
+
+    public void setInstallment(List<Installment> installment) {
+        this.installment = installment;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "Policy{" +
+                "policyId=" + policyId +
+                ", number='" + number + '\'' +
+                ", policyType=" + policyType +
+                ", objectType=" + objectType +
+                ", status=" + status +
+                ", insuredObjects=" + insuredObjects +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", premium=" + premium +
+                ", noOfInstallments=" + noOfInstallments +
+                ", installment=" + installment +
+                ", paymentStatus=" + paymentStatus +
+                ", sumInsured=" + sumInsured +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Policy policy = (Policy) o;
+
+        return policyId == policy.policyId;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (policyId ^ (policyId >>> 32));
     }
 }

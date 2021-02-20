@@ -1,41 +1,54 @@
 package com.ana.PrivateInsurancePortfolio.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long userId;
     private String firstName;
     private String lastName;
     private String login;
     private String password;
     private String email;
     private String mobile;
+    @OneToMany(mappedBy = "user")
+    private Set<Policy> policies;
 
-    public User() {
+    @OneToMany(mappedBy = "user")
+    private Set<Property> property;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Vehicle> vehicles;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Person> persons;
+
+    public User(Set<Property> property) {
+        this.property = property;
     }
 
-    public User(String firstName, String lastName, String login, String password, String email, String mobile) {
+    public User(String firstName, String lastName, String login, String password, String email, String mobile, Set<Policy> policies, Set<Vehicle> vehicles, Set<Person> persons) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;
         this.password = password;
         this.email = email;
         this.mobile = mobile;
+        this.policies = policies;
+        this.vehicles = vehicles;
+        this.persons = persons;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {
@@ -84,5 +97,68 @@ public class User {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public Set<Policy> getPolicies() {
+        return policies;
+    }
+
+    public void setPolicies(Set<Policy> policies) {
+        this.policies = policies;
+    }
+
+    public Set<Property> getProperty() {
+        return property;
+    }
+
+    public void setProperty(Set<Property> property) {
+        this.property = property;
+    }
+
+    public Set<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    public void setVehicles(Set<Vehicle> vehicles) {
+        this.vehicles = vehicles;
+    }
+
+    public Set<Person> getPersons() {
+        return persons;
+    }
+
+    public void setPersons(Set<Person> persons) {
+        this.persons = persons;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", login='" + login + '\'' +
+                ", email='" + email + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", policies=" + policies +
+                ", property=" + property +
+                ", vehicles=" + vehicles +
+                ", persons=" + persons +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        return userId != null ? userId.equals(user.userId) : user.userId == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return userId != null ? userId.hashCode() : 0;
     }
 }
