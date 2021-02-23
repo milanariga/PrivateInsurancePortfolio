@@ -1,6 +1,7 @@
 package com.ana.PrivateInsurancePortfolio.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -18,7 +19,7 @@ public class Vehicle {
     private String certNo;
 
     @ManyToMany(mappedBy = "insuredObjects")
-    private Set<Policy> policies;
+    private Set<Policy> policies = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -27,15 +28,13 @@ public class Vehicle {
     public Vehicle() {
     }
 
-    public Vehicle(Long vehicleId, VehicleType type, String make, String model, int makeYear, String regNo, String certNo, Set<Policy> policies, User user) {
-        this.vehicleId = vehicleId;
+    public Vehicle(VehicleType type, String make, String model, int makeYear, String regNo, String certNo, User user) {
         this.type = type;
         this.make = make;
         this.model = model;
         this.makeYear = makeYear;
         this.regNo = regNo;
         this.certNo = certNo;
-        this.policies = policies;
         this.user = user;
     }
 

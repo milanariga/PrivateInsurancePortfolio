@@ -2,6 +2,7 @@ package com.ana.PrivateInsurancePortfolio.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -20,7 +21,7 @@ public class Policy {
     @ManyToMany
     @JoinTable(name = "policy_objects", joinColumns = @JoinColumn(name = "policy_id"),
                 inverseJoinColumns = @JoinColumn(name = "vehicle_id"))
-    private Set<Vehicle> insuredObjects; //object IDs
+    private Set<Vehicle> insuredObjects = new HashSet<>(); //object IDs
     private Date startDate;
     private Date endDate;
     private Double premium;
@@ -39,23 +40,21 @@ public class Policy {
     public Policy() {
     }
 
-    public Policy(long policyId, String number, PolicyType policyType, ObjectType objectType, PolicyStatus status, Set<Vehicle> insuredObjects, Date startDate, Date endDate, Double premium, int noOfInstallments, List<Installment> installment, PaymentStatus paymentStatus, Double sumInsured, User user) {
-        this.policyId = policyId;
+    public Policy(String number, PolicyType policyType, ObjectType objectType, PolicyStatus status,
+                  Date startDate, Date endDate, Double premium,
+                  int noOfInstallments, PaymentStatus paymentStatus, Double sumInsured, User user) {
         this.number = number;
         this.policyType = policyType;
         this.objectType = objectType;
         this.status = status;
-        this.insuredObjects = insuredObjects;
         this.startDate = startDate;
         this.endDate = endDate;
         this.premium = premium;
         this.noOfInstallments = noOfInstallments;
-        this.installment = installment;
         this.paymentStatus = paymentStatus;
         this.sumInsured = sumInsured;
         this.user = user;
     }
-
 
     public long getPolicyId() {
         return policyId;
@@ -97,7 +96,7 @@ public class Policy {
         this.status = status;
     }
 
-    public Set<?> getInsuredObjects() {
+    public Set<Vehicle> getInsuredObjects() {
         return insuredObjects;
     }
 

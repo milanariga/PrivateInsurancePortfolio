@@ -31,16 +31,13 @@ public class User {
         this.property = property;
     }
 
-    public User(String firstName, String lastName, String login, String password, String email, String mobile, Set<Policy> policies, Set<Vehicle> vehicles, Set<Person> persons) {
+    public User(String firstName, String lastName, String login, String password, String email, String mobile) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;
         this.password = password;
         this.email = email;
         this.mobile = mobile;
-        this.policies = policies;
-        this.vehicles = vehicles;
-        this.persons = persons;
     }
 
     public Long getUserId() {
