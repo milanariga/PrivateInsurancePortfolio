@@ -27,8 +27,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Person> persons;
 
-    public User(Set<Property> property) {
-        this.property = property;
+    public User() {
+
     }
 
     public User(String firstName, String lastName, String login, String password, String email, String mobile) {

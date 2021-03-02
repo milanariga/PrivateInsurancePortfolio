@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Private Insurance portfolio</title>
+</head>
+<body>
+<h1>Policy List</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Vehicle type</th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Reg No</th>
+    </tr>
+    <tr th:each = "vehicle : ${vehicles}">
+        <td th:text="${vehicle.vehicleId}">123</td>
+        <td th:text="${vehicle.type}">Car</td>
+        <td th:text="${vehicle.make}">Toyota</td>
+        <td th:text="${vehicle.model}">RAV4</td>
+        <td th:text="${vehicle.regNo}">MD3267</td>
+    </tr>
+</table>
+</body>
+</html>
