@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Private Insurance portfolio</title>
+</head>
+<body>
+<h1>Policies List</h1>
+
+<table>
+    <tr>
+        <th>Number</th>
+        <th>Policy type</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Premium</th>
+    </tr>
+    <tr th:each = "policy : ${policies}">
+        <td th:text="${policy.number}">1</td>
+        <td th:text="${policy.policyType}">MOD</td>
+        <td th:text="${#dates.format(policy.startDate, 'dd-MM-yyyy')}">01.01.2021</td>
+        <td th:text="${#dates.format(policy.endDate, 'dd-MM-yyyy')}">31.12.2021</td>
+        <td th:text="${policy.premium}">100.00</td>
+    </tr>
+</table>
+</body>
+</html>
