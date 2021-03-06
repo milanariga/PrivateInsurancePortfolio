@@ -15,12 +15,12 @@
         <th>Login</th>
         <th>Mobile</th>
     </tr>
-    <tr th:each = "user : ${users}">
-        <td th:text="${user.userId}">1</td>
-        <td th:text="${user.firstName}">John</td>
-        <td th:text="${user.lastName}">Doe</td>
-        <td th:text="${user.login}">j.doe</td>
-        <td th:text="${user.mobile}">+44444444</td>
+    <tr th:each = "systemUser : ${users}">
+        <td th:text="${systemUser.userId}">1</td>
+        <td th:text="${systemUser.firstName}">John</td>
+        <td th:text="${systemUser.lastName}">Doe</td>
+        <td th:text="${systemUser.login}">j.doe</td>
+        <td th:text="${systemUser.mobile}">+44444444</td>
     </tr>
 </table>
 </body>
