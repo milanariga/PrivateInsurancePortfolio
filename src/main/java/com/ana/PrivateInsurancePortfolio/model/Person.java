@@ -1,12 +1,16 @@
 package com.ana.PrivateInsurancePortfolio.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "Person")
+@Table(
+        name = "person"
+)
 public class Person {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
     @SequenceGenerator(
             name = "person_sequence",
             sequenceName = "person_sequence",
@@ -17,7 +21,7 @@ public class Person {
             generator = "person_sequence"
     )
     @Column (
-            name = "id",
+            name = "person_id",
             updatable = false
     )
     private Long personId;
@@ -47,6 +51,10 @@ public class Person {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private SystemUser relatedUser;
+
+    @OneToMany
+    @JoinColumn(name = "person_id")
+    private Set<Vehicle> vehicles = new HashSet<>();
 
     public Person() {
     }
@@ -108,6 +116,14 @@ public class Person {
 
     public void setRelatedUser(SystemUser relatedUser) {
         this.relatedUser = relatedUser;
+    }
+
+    public Set<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    public void setVehicles(Set<Vehicle> vehicles) {
+        this.vehicles = vehicles;
     }
 
     @Override
