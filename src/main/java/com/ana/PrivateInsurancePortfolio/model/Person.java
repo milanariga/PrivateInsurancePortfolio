@@ -51,11 +51,10 @@ public class Person {
     public Person() {
     }
 
-    public Person(Long personId, String firstName, String lastName, String idCode,
+    public Person(String firstName, String lastName, String idCode,
                   //Set<Policy> policies,
                   SystemUser relatedUser
     ) {
-        this.personId = personId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.idCode = idCode;

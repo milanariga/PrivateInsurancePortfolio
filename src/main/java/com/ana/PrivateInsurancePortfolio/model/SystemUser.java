@@ -1,6 +1,7 @@
 package com.ana.PrivateInsurancePortfolio.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "SystemUser")
@@ -80,8 +81,8 @@ public class SystemUser {
             name = "related_persons"
     )
     @OneToMany
-    @JoinColumn(name = "id")
-    private Set<Person> relatedPersons;
+    @JoinColumn(name = "user_id")
+    private Set<Person> relatedPersons = new HashSet<>();
 
     public SystemUser() {
 
@@ -176,13 +177,13 @@ public class SystemUser {
 //        this.vehicles = vehicles;
 //    }
 
-//    public Set<Person> getPersons() {
-//        return persons;
-//    }
-//
-//    public void setPersons(Set<Person> persons) {
-//        this.persons = persons;
-//    }
+    public Set<Person> getRelatedPersons() {
+        return relatedPersons;
+    }
+
+    public void setRelatedPersons(Set<Person> relatedPersons) {
+        this.relatedPersons = relatedPersons;
+    }
 
     @Override
     public String toString() {
