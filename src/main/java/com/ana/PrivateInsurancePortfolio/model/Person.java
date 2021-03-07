@@ -1,9 +1,6 @@
 package com.ana.PrivateInsurancePortfolio.model;
 
-import org.springframework.stereotype.Controller;
-
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity(name = "Person")
 public class Person {
@@ -47,24 +44,23 @@ public class Person {
     //@ManyToMany(mappedBy = "policyId")
     //private Set<Policy> policies;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    private User user;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private SystemUser relatedUser;
 
     public Person() {
     }
 
-    public Person(Long personId, String firstName, String lastName, String idCode
-            //,
+    public Person(Long personId, String firstName, String lastName, String idCode,
                   //Set<Policy> policies,
-                  //User user
+                  SystemUser relatedUser
     ) {
         this.personId = personId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.idCode = idCode;
         //this.policies = policies;
-        //this.user = user;
+        this.relatedUser = relatedUser;
     }
 
     public Long getPersonId() {
@@ -107,13 +103,13 @@ public class Person {
 //        this.policies = policies;
 //    }
 
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+    public SystemUser getRelatedUser() {
+        return relatedUser;
+    }
+
+    public void setRelatedUser(SystemUser relatedUser) {
+        this.relatedUser = relatedUser;
+    }
 
     @Override
     public String toString() {
@@ -123,7 +119,7 @@ public class Person {
                 ", lastName='" + lastName + '\'' +
                 ", idCode='" + idCode + '\'' +
                 //", policies=" + policies +
-                //", user=" + user +
+                ", user=" + relatedUser +
                 '}';
     }
 

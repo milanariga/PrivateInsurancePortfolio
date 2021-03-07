@@ -1,8 +1,15 @@
 package com.ana.PrivateInsurancePortfolio.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
-@Entity(name = "System_user")
+@Entity(name = "SystemUser")
+@Table(
+        name = "system_user",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "user_login_unique", columnNames = "login")
+        }
+)
 public class SystemUser {
 
     @Id
@@ -17,8 +24,9 @@ public class SystemUser {
             generator = "user_sequence"
     )
     @Column (
-            name = "id",
-            updatable = false
+            name = "user_id",
+            updatable = false,
+            insertable = false
     )
     private Long userId;
 
@@ -39,8 +47,7 @@ public class SystemUser {
     @Column(
             name = "login",
             nullable = false,
-            columnDefinition = "VARCHAR(100)",
-            unique = true
+            columnDefinition = "VARCHAR(100)"
     )
     private String login;
     @Column(
@@ -69,8 +76,12 @@ public class SystemUser {
 //    @OneToMany(mappedBy = "user")
 //    private Set<Vehicle> vehicles;
 
-    //@OneToMany(mappedBy = "user")
-    //private Set<Person> persons;
+    @Column(
+            name = "related_persons"
+    )
+    @OneToMany
+    @JoinColumn(name = "id")
+    private Set<Person> relatedPersons;
 
     public SystemUser() {
 
