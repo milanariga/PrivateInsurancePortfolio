@@ -126,6 +126,10 @@ public class Person {
         this.vehicles = vehicles;
     }
 
+    public void addVehicle(Vehicle vehicle){
+        this.vehicles.add(vehicle);
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -152,4 +156,5 @@ public class Person {
     public int hashCode() {
         return personId != null ? personId.hashCode() : 0;
     }
+
 }

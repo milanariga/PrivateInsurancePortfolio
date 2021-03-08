@@ -51,7 +51,7 @@ public class Vehicle {
     @Column(
             name = "reg_no",
             nullable = false,
-            columnDefinition = "VARCHAR(6)"
+            columnDefinition = "VARCHAR(10)"
     )
     private String regNo;
 
