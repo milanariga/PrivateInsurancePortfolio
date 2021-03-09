@@ -24,7 +24,8 @@ public class Vehicle {
     )
     private Long vehicleId;
 
-    @Enumerated(EnumType.ORDINAL)
+    //@Enumerated
+    @Convert(converter = VehicleTypeConverter.class)
     private VehicleType type;
 
     @Column(

@@ -2,5 +2,6 @@ package com.ana.PrivateInsurancePortfolio.model;
 
 public enum VehicleType {
 
-    CAR,TRACTOR,TRAILER
+    CAR, TRACTOR, MOTORCYCLE, TRAILER;
+
 }
