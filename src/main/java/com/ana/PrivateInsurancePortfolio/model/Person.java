@@ -56,6 +56,11 @@ public class Person {
     @JoinColumn(name = "person_id")
     private Set<Vehicle> vehicles = new HashSet<>();
 
+    @OneToMany
+    @JoinColumn(name = "person_id")
+    private Set<Property> properties = new HashSet<>();
+
+
     public Person() {
     }
 
@@ -128,6 +133,18 @@ public class Person {
 
     public void addVehicle(Vehicle vehicle){
         this.vehicles.add(vehicle);
+    }
+
+    public Set<Property> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(Set<Property> properties) {
+        this.properties = properties;
+    }
+
+    public void addProperty(Property property){
+        this.properties.add(property);
     }
 
     @Override

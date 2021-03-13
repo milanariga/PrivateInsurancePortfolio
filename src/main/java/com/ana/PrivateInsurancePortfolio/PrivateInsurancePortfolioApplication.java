@@ -1,10 +1,8 @@
 package com.ana.PrivateInsurancePortfolio;
 
-import com.ana.PrivateInsurancePortfolio.model.Person;
-import com.ana.PrivateInsurancePortfolio.model.SystemUser;
-import com.ana.PrivateInsurancePortfolio.model.Vehicle;
-import com.ana.PrivateInsurancePortfolio.model.VehicleType;
+import com.ana.PrivateInsurancePortfolio.model.*;
 import com.ana.PrivateInsurancePortfolio.repositories.PersonRepository;
+import com.ana.PrivateInsurancePortfolio.repositories.PropertyRepository;
 import com.ana.PrivateInsurancePortfolio.repositories.UserRepository;
 import com.ana.PrivateInsurancePortfolio.repositories.VehicleRepository;
 import org.springframework.aop.TargetSource;
@@ -23,7 +21,8 @@ public class PrivateInsurancePortfolioApplication {
 	@Bean
 	CommandLineRunner commandLineRunner(UserRepository userRepository,
 										PersonRepository personRepository,
-										VehicleRepository vehicleRepository){
+										VehicleRepository vehicleRepository,
+										PropertyRepository propertyRepository){
 		return args -> {
 			SystemUser jake = new SystemUser(
 					"Jake",
@@ -75,6 +74,19 @@ public class PrivateInsurancePortfolioApplication {
 			maria.addVehicle(tractor);
 
 			System.out.println(maria.getVehicles().toString());
+
+			Property testProperty = new Property(
+					"some address",
+					2015,
+					150.5,
+					1,
+					david
+			);
+
+			propertyRepository.save(testProperty);
+
+			david.addProperty(testProperty);
+			System.out.println(david.getProperties().toString());
 
 		};
 	}
