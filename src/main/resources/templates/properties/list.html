@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Private Insurance portfolio</title>
+</head>
+<body>
+<h1>Property List</h1>
+
+<table>
+    <tr>
+        <th>Address</th>
+        <th>Construction year</th>
+        <th>Area</th>
+        <th>Number of floors</th>
+        <th>Owner</th>
+    </tr>
+    <tr th:each = "property : ${properties}">
+        <td th:text="${property.address}">Some address</td>
+        <td th:text="${property.constrYear}">2018</td>
+        <td th:text="${property.area}">35.00</td>
+        <td th:text="${property.numOfFloor}">1</td>
+        <td th:text="${property.owner.personId}">44</td>
+    </tr>
+</table>
+</body>
+</html>

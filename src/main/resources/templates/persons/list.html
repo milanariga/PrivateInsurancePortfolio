@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Private Insurance portfolio</title>
+</head>
+<body>
+<h1>Persons List</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Id code</th>
+        <th>Related User</th>
+    </tr>
+    <tr th:each = "person : ${persons}">
+        <td th:text="${person.personId}">1</td>
+        <td th:text="${person.firstName}">John</td>
+        <td th:text="${person.lastName}">Doe</td>
+        <td th:text="${person.idCode}">123456</td>
+        <td th:text="${person.relatedUser.userId}">34</td>
+    </tr>
+</table>
+</body>
+</html>
