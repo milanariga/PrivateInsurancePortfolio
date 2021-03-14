@@ -10,7 +10,8 @@ public class Property {
     @SequenceGenerator(
             name = "property_sequence",
             sequenceName = "property_sequence",
-            allocationSize = 1
+            allocationSize = 1,
+            initialValue = 300
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
@@ -51,7 +52,11 @@ public class Property {
     private int numOfFloor;
 
     @ManyToOne
-    @JoinColumn(name = "person_id")
+    @JoinColumn(
+            name = "person_id",
+            //referencedColumnName = "person_id",
+            foreignKey = @ForeignKey(name = "FK_property_owner_id")
+    )
     private Person owner;
 
     //@ManyToMany(mappedBy = "policyId")

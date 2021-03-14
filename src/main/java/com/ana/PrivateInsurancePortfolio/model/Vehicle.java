@@ -12,7 +12,8 @@ public class Vehicle {
     @SequenceGenerator(
             name = "vehicle_sequence",
             sequenceName = "vehicle_sequence",
-            allocationSize = 1
+            allocationSize = 1,
+            initialValue = 200
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
@@ -67,7 +68,10 @@ public class Vehicle {
 //    private Set<Policy> policies = new HashSet<>();
 
     @ManyToOne
-    @JoinColumn(name = "person_id")
+    @JoinColumn(
+            name = "person_id",
+            foreignKey = @ForeignKey(name = "FK_vehicle_owner_id")
+    )
     private Person owner;
 
     public Vehicle() {
