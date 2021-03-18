@@ -15,6 +15,8 @@ public class PaymentStatusConverter implements AttributeConverter<PaymentStatus,
                 return "LATE";
             case PARTIALLY_PAID:
                 return "PART";
+            case UNAVAILABLE:
+                return "NA";
             default:throw new IllegalArgumentException("Unknown payment status " + paymentStatus);
         }
     }
@@ -30,6 +32,8 @@ public class PaymentStatusConverter implements AttributeConverter<PaymentStatus,
                 return PaymentStatus.OVERDUE;
             case "PART":
                 return PaymentStatus.PARTIALLY_PAID;
+            case "NA":
+                return PaymentStatus.UNAVAILABLE;
             default:throw new IllegalArgumentException("Unknown status " + s);
         }
     }

@@ -105,23 +105,23 @@ public class PrivateInsurancePortfolioApplication {
 					endDate,
 					120.0,
 					1,
-					//PaymentStatus.UNPAID,
+					PaymentStatus.UNAVAILABLE,
 					1000000.0,
 					david);
 
 			policyRepository.save(mtplPolicy);
 
-//			Installment firstPaym = new Installment(
-//					mtplPolicy,
-//					1,
-//					1,
-//					120.0,
-//					paymDate,
-//					PaymentStatus.UNPAID
-//			);
-//
-//			installmentRepository.save(firstPaym);
-//			mtplPolicy.addInstallment(firstPaym);
+			Installment firstPaym = new Installment(
+					mtplPolicy,
+					1,
+					1,
+					120.0,
+					paymDate,
+					PaymentStatus.UNPAID
+			);
+
+			installmentRepository.save(firstPaym);
+			mtplPolicy.addInstallment(firstPaym);
 
 		};
 	}

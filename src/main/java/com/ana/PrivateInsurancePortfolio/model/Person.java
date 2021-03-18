@@ -14,7 +14,8 @@ public class Person {
     @SequenceGenerator(
             name = "person_sequence",
             sequenceName = "person_sequence",
-            allocationSize = 1
+            allocationSize = 1,
+            initialValue = 400
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,

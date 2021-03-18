@@ -1,9 +1,10 @@
 package com.ana.PrivateInsurancePortfolio.model;
 
+import com.ana.PrivateInsurancePortfolio.repositories.InstallmentRepository;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -70,19 +71,20 @@ public class Policy {
     private Double premium;
 
     @Column(
-            name = "installments",
+            name = "installments_count",
             nullable = false,
             columnDefinition = ("SMALLINT")
     )
     private int noOfInstallments;
 
-//    @OneToMany
-//    @JoinColumn(
-//            name = "installment_id"
-//    )
-//    private Set<Installment> installments = new HashSet<>();
+    @OneToMany
+    @JoinColumn(
+            name = "policy_id"
+    )
+    private Set<Installment> installments = new HashSet<>();
 
-//    private PaymentStatus paymentStatus;
+    @Convert(converter = PaymentStatusConverter.class)
+    private PaymentStatus policyPaymentStatus;
 
     @Column(
             name = "sum_insured",
@@ -103,7 +105,7 @@ public class Policy {
     public Policy(String number, PolicyType policyType, ObjectType objectType, PolicyStatus status,
                   Date startDate, Date endDate, Double premium,
                   int noOfInstallments,
-                  //PaymentStatus paymentStatus,
+                  PaymentStatus policyPaymentStatus,
                   Double sumInsured, Person policyHolder) {
         this.number = number;
         this.policyType = policyType;
@@ -113,7 +115,7 @@ public class Policy {
         this.endDate = endDate;
         this.premium = premium;
         this.noOfInstallments = noOfInstallments;
-        //this.paymentStatus = paymentStatus;
+        this.policyPaymentStatus = policyPaymentStatus;
         this.sumInsured = sumInsured;
         this.policyHolder = policyHolder;
     }
@@ -198,14 +200,6 @@ public class Policy {
         this.noOfInstallments = noOfInstallments;
     }
 
-//    public PaymentStatus getPaymentStatus() {
-//        return paymentStatus;
-//    }
-//
-//    public void setPaymentStatus(PaymentStatus paymentStatus) {
-//        this.paymentStatus = paymentStatus;
-//    }
-
     public Double getSumInsured() {
         return sumInsured;
     }
@@ -214,18 +208,34 @@ public class Policy {
         this.sumInsured = sumInsured;
     }
 
-//    public Set<Installment> getInstallments() {
-//        return installments;
-//    }
-//
-//    public void setInstallments(Set<Installment> installments) {
-//        this.installments = installments;
-//    }
-//
-//
-//    public void addInstallment(Installment installment){
-//        this.installments.add(installment);
-//    }
+    public Set<Installment> getInstallments() {
+        return installments;
+    }
+
+    public void setInstallments(Set<Installment> installments) {
+        //this.installments = getInstallments().addAll(installments);
+        this.installments = installments;
+    }
+
+
+    public void addInstallment(Installment installment){
+        this.installments.add(installment);
+    }
+
+    public PaymentStatus getPolicyPaymentStatus() {
+        PaymentStatus policyPaymentStatus = PaymentStatus.UNAVAILABLE;
+//        if (this.noOfInstallments == 1){
+//            policyPaymentStatus  = installments.stream().findFirst().get().getPaymentStatus();
+//            setPolicyPaymentStatus(policyPaymentStatus);
+//        } else {
+//            //TODO
+//        }
+        return policyPaymentStatus;
+    }
+
+    public void setPolicyPaymentStatus(PaymentStatus policyPaymentStatus) {
+        this.policyPaymentStatus = policyPaymentStatus;
+    }
 
     public Person getPolicyHolder() {
         return policyHolder;

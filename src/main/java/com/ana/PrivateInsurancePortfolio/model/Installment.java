@@ -24,12 +24,12 @@ public class Installment {
     )
     private Long installmentId;
 
-//    @ManyToOne
-//    @JoinColumn(
-//            name = "policyId",
-//            foreignKey = @ForeignKey(name = "FK_policy")
-//    )
-//    private Policy policy;
+    @ManyToOne
+    @JoinColumn(
+            name = "policy_id",
+            foreignKey = @ForeignKey(name = "FK_policy")
+    )
+    private Policy policy;
 
     public int getInstallmentCount() {
         return installmentCount;
@@ -74,9 +74,9 @@ public class Installment {
     }
 
     public Installment(
-            //Policy policy,
+            Policy policy,
                        int installmentCount, int installmentNo, double amount, Date paymentDueDate, PaymentStatus paymentStatus) {
-        //this.policy = policy;
+        this.policy = policy;
         this.installmentCount = installmentCount;
         this.installmentNo = installmentNo;
         this.amount = amount;
@@ -92,13 +92,13 @@ public class Installment {
         this.installmentId = installmentId;
     }
 
-//    public Policy getPolicy() {
-//        return policy;
-//    }
-//
-//    public void setPolicy(Policy policy) {
-//        this.policy = policy;
-//    }
+    public Policy getPolicy() {
+        return policy;
+    }
+
+    public void setPolicy(Policy policy) {
+        this.policy = policy;
+    }
 
     public int getInstallmentNo() {
         return installmentNo;
