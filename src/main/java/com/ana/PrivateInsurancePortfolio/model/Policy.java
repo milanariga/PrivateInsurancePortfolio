@@ -217,13 +217,8 @@ public class Policy {
         this.installments = installments;
     }
 
-
-    public void addInstallment(Installment installment){
-        this.installments.add(installment);
-    }
-
     public PaymentStatus getPolicyPaymentStatus() {
-        PaymentStatus policyPaymentStatus = PaymentStatus.UNAVAILABLE;
+//        PaymentStatus policyPaymentStatus = PaymentStatus.UNAVAILABLE;
 //        if (this.noOfInstallments == 1){
 //            policyPaymentStatus  = installments.stream().findFirst().get().getPaymentStatus();
 //            setPolicyPaymentStatus(policyPaymentStatus);
@@ -235,6 +230,13 @@ public class Policy {
 
     public void setPolicyPaymentStatus(PaymentStatus policyPaymentStatus) {
         this.policyPaymentStatus = policyPaymentStatus;
+    }
+
+    public void addInstallment(Installment installment){
+        this.installments.add(installment);
+        setPolicyPaymentStatus(installment.getPaymentStatus());
+        System.out.println(installment.getPaymentStatus().toString());
+        System.out.println(policyPaymentStatus.toString());
     }
 
     public Person getPolicyHolder() {
