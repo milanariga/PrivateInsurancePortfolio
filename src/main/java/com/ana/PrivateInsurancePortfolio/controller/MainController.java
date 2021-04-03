@@ -23,9 +23,9 @@ public class MainController {
     }
 
     @GetMapping("/main")
-    public String main(Model model){
-        model.addAttribute("vehicles", vehicleRepository.findAll());
+    public String main(Map<String, Object> model){
+        model.put("vehicles", vehicleRepository.findAll());
 
-        return "vehicles/list";
+        return "main";
     }
 }
