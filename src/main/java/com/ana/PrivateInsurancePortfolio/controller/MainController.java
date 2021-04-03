@@ -17,9 +17,9 @@ public class MainController {
     private VehicleRepository vehicleRepository;
 
     @GetMapping("/")
-    public String home1(Map<String,Object> model){
+    public String home(Map<String,Object> model){
 
-        return "home1";
+        return "home";
     }
 
     @GetMapping("/main")
