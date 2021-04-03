@@ -3,12 +3,14 @@ package com.ana.PrivateInsurancePortfolio.repositories;
 import com.ana.PrivateInsurancePortfolio.exceptions.InsAuthException;
 import com.ana.PrivateInsurancePortfolio.model.SystemUser;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Optional;
 
 @Repository
+@Transactional
 public class UserRepositoryImpl extends ORMRepository implements CustomSystemUserRepository {
 
     @PersistenceContext
@@ -16,7 +18,7 @@ public class UserRepositoryImpl extends ORMRepository implements CustomSystemUse
 
     @Override
     public void createSystemUser(SystemUser user) {
-        session().save(user);
+        entityManager.persist(user);
     }
 
     @Override
@@ -31,7 +33,7 @@ public class UserRepositoryImpl extends ORMRepository implements CustomSystemUse
     }
 
     @Override
-    public Integer getCountbyLogin(String login) {
+    public Integer getCountByLogin(String login) {
         return null;
     }
 }

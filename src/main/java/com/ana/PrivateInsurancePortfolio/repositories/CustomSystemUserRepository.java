@@ -11,5 +11,5 @@ public interface CustomSystemUserRepository {
 
     Optional<SystemUser> findByLoginAndPassword(String login, String password);
 
-    Integer getCountbyLogin(String login);
+    Integer getCountByLogin(String login);
 }
