@@ -22,14 +22,16 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerSystemUser(SystemUser user, Map<String, Object> model){
-        SystemUser userFromDb = userRepository.findByLogin(user.getLogin());
+        SystemUser userFromDb = userRepository.findByUsername(user.getUsername());
 
         if (userFromDb != null){
             model.put("message", "User already exists! Choose different login");
             return "register";
         }
 
+        user.setActive(true);
         userRepository.save(user);
+        System.out.println(user.toString());
 
         return "redirect:/login";
     }

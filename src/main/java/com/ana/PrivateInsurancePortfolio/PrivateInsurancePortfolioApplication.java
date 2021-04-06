@@ -2,7 +2,6 @@ package com.ana.PrivateInsurancePortfolio;
 
 import com.ana.PrivateInsurancePortfolio.model.*;
 import com.ana.PrivateInsurancePortfolio.repositories.*;
-import org.springframework.aop.TargetSource;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -32,7 +31,7 @@ public class PrivateInsurancePortfolioApplication {
 					"jake.brown",
 					"pass123",
 					"test@test.com",
-					"+37122222222");
+					"+37122222222", true);
 			userRepository.save(jake);
 
 			Person maria = new Person(

@@ -8,7 +8,7 @@ import java.util.Set;
 @Table(
         name = "system_user",
         uniqueConstraints = {
-                @UniqueConstraint(name = "user_login_unique", columnNames = "login")
+                @UniqueConstraint(name = "username_unique", columnNames = "username")
         }
 )
 public class SystemUser {
@@ -46,11 +46,11 @@ public class SystemUser {
     private String lastName;
 
     @Column(
-            name = "login",
+            name = "username",
             nullable = false,
             columnDefinition = "VARCHAR(100)"
     )
-    private String login;
+    private String username;
     @Column(
             name = "password",
             nullable = false,
@@ -84,17 +84,25 @@ public class SystemUser {
     @JoinColumn(name = "user_id")
     private Set<Person> relatedPersons = new HashSet<>();
 
+    @Column(
+            name = "active",
+            nullable = false,
+            columnDefinition = "BOOLEAN"
+    )
+    private boolean active;
+
     public SystemUser() {
 
     }
 
-    public SystemUser(String firstName, String lastName, String login, String password, String email, String mobile) {
+    public SystemUser(String firstName, String lastName, String username, String password, String email, String mobile, boolean active) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.login = login;
+        this.username = username;
         this.password = password;
         this.email = email;
         this.mobile = mobile;
+        this.active = active;
     }
 
     public Long getUserId() {
@@ -121,12 +129,12 @@ public class SystemUser {
         this.lastName = lastName;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -153,7 +161,15 @@ public class SystemUser {
         this.mobile = mobile;
     }
 
-//    public Set<Policy> getPolicies() {
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    //    public Set<Policy> getPolicies() {
 //        return policies;
 //    }
 //
@@ -191,7 +207,7 @@ public class SystemUser {
                 "userId=" + userId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", login='" + login + '\'' +
+                ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", mobile='" + mobile + '\'' +
 //                ", policies=" + policies +

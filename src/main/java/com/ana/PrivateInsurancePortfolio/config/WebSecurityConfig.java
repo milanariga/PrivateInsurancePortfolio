@@ -2,7 +2,6 @@ package com.ana.PrivateInsurancePortfolio.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -38,6 +37,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication()
             .dataSource(dataSource)
             .passwordEncoder(NoOpPasswordEncoder.getInstance())
-            .usersByUsernameQuery("select login, password from system_user where login=:login");
+            .usersByUsernameQuery("select username, password, active from system_user where username=?")
+            .authoritiesByUsernameQuery("select username, 'USER' from system_user where username=?");
+
     }
 }
