@@ -1,43 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    ...
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+<nav class="navbar navbar-inverse navbar-static-top" th:fragment="header">
     <div class="container">
-        <div class="navbar-header">
+        <div class="navbar-header row text-center top-buffer-small bg-white">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+<!--                <span class="icon-bar"></span>-->
             </button>
-            <a class="navbar-brand" href="#">My project</a>
+            <a class="navbar-brand">Insurance Portfolio</a>
+<!--            <a class="nav navbar-nav" href="#" th:href="@{/main}">Home</a>-->
+<!--            <a class="nav navbar-nav" href="#" th:href="@{/vehicles}">Vehicles</a>-->
         </div>
-        <div class="navbar-collapse collapse">
+        <div class="navbar-collapse collapse ">
             <ul class="nav navbar-nav">
                 <li th:classappend="${module == 'home' ? 'active' : ''}">
-                    <a href="#" th:href="@{/}">Home</a>
+                    <a href="#" th:href="@{/main}">Home</a>
                 </li>
                 <li th:classappend="${module == 'vehicles' ? 'active' : ''}">
                     <a href="#" th:href="@{/vehicles}">Vehicles</a>
                 </li>
             </ul>
-<!--            <ul class="nav navbar-nav navbar-right">-->
-<!--                <li th:if="${#authorization.expression('!isAuthenticated()')}">-->
-<!--                    <a href="/signin" th:href="@{/signin}">-->
-<!--                        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign in-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                <li th:if="${#authorization.expression('isAuthenticated()')}">-->
-<!--                    <a href="/logout" th:href="@{#}" onclick="$('#form').submit();">-->
-<!--                        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout-->
-<!--                    </a>-->
-<!--                    <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>-->
-<!--                </li>-->
-<!--            </ul>-->
-        </div>
+<!--&lt;!&ndash;            <ul class="nav navbar-nav navbar-right">&ndash;&gt;-->
+<!--&lt;!&ndash;                <li th:if="${#authorization.expression('!isAuthenticated()')}">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <a href="/signin" th:href="@{/signin}">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign in&ndash;&gt;-->
+<!--&lt;!&ndash;                    </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                <li th:if="${#authorization.expression('isAuthenticated()')}">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <a href="/logout" th:href="@{#}" onclick="$('#form').submit();">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout&ndash;&gt;-->
+<!--&lt;!&ndash;                    </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>&ndash;&gt;-->
+<!--&lt;!&ndash;                </li>&ndash;&gt;-->
+<!--&lt;!&ndash;            </ul>&ndash;&gt;-->
+<!--        </div>-->
     </div>
-</div>
+</nav>
 </body>
 </html>

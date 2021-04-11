@@ -1,0 +1,14 @@
+body{
+    min-width: 320px;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    color: #3E3D3D;
+}
+
+a{
+    color: #030B6C;
+}
+
+a:hover{
+    color: #232CA1;
+}
