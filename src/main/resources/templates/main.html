@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Private Insurance portfolio</title>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
 <body>
+<div th:replace="fragments/header :: header"/>
 <div>
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Sign out"/>
@@ -29,5 +31,6 @@
         <td th:text="${vehicle.regNo}">MD3267</td>
     </tr>
 </table>
+<div th:replace="fragments/footer :: footer"/>
 </body>
 </html>

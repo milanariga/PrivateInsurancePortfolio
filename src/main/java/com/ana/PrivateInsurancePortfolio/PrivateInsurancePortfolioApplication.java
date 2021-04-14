@@ -28,8 +28,8 @@ public class PrivateInsurancePortfolioApplication {
 			SystemUser jake = new SystemUser(
 					"Jake",
 					"Brown",
-					"jake.brown",
-					"pass123",
+					"jb",
+					"pass",
 					"test@test.com",
 					"+37122222222", true);
 			userRepository.save(jake);

@@ -2,9 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
   <head>
-    <title>Login page</title>
+      <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"/>
+    <title>User registration</title>
   </head>
   <body>
+  <div th:replace="fragments/header :: header"/>
     <h1>User registration</h1>
     <span th:if="${param.message} != null" th:text="${message}">
         Invalid data
@@ -21,7 +23,9 @@
         <div><label> Username: <input type="text" name="username"/> </label></div>
         <div><label> Password: <input type="password" name="password"/> </label></div>
         <div><label> Email: <input type="email" name="email"/> </label></div>
-        <div><input type="submit" value="Register"/></div>
+        <div><input class="btn btn-large btn-success" type="submit" value="Register"/></div>
+
     </form>
+  <div th:replace="fragments/footer :: footer"/>
   </body>
 </html>

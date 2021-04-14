@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
@@ -13,8 +14,6 @@
 <!--                <span class="icon-bar"></span>-->
             </button>
             <a class="navbar-brand">Insurance Portfolio</a>
-<!--            <a class="nav navbar-nav" href="#" th:href="@{/main}">Home</a>-->
-<!--            <a class="nav navbar-nav" href="#" th:href="@{/vehicles}">Vehicles</a>-->
         </div>
         <div class="navbar-collapse collapse ">
             <ul class="nav navbar-nav">
@@ -25,20 +24,20 @@
                     <a href="#" th:href="@{/vehicles}">Vehicles</a>
                 </li>
             </ul>
-<!--&lt;!&ndash;            <ul class="nav navbar-nav navbar-right">&ndash;&gt;-->
-<!--&lt;!&ndash;                <li th:if="${#authorization.expression('!isAuthenticated()')}">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <a href="/signin" th:href="@{/signin}">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign in&ndash;&gt;-->
-<!--&lt;!&ndash;                    </a>&ndash;&gt;-->
-<!--&lt;!&ndash;                </li>&ndash;&gt;-->
-<!--&lt;!&ndash;                <li th:if="${#authorization.expression('isAuthenticated()')}">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <a href="/logout" th:href="@{#}" onclick="$('#form').submit();">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout&ndash;&gt;-->
-<!--&lt;!&ndash;                    </a>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>&ndash;&gt;-->
-<!--&lt;!&ndash;                </li>&ndash;&gt;-->
-<!--&lt;!&ndash;            </ul>&ndash;&gt;-->
-<!--        </div>-->
+            <ul class="nav navbar-nav navbar-right">
+                <li th:if="${#authorization.expression('!isAuthenticated()')}">
+                    <a href="/login" th:href="@{/login}">
+                        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign in
+                    </a>
+                </li>
+                <li th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a href="/logout" th:href="@{#}" onclick="$('#form').submit();">
+                        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout
+                    </a>
+                    <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
 </body>

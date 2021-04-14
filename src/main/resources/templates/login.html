@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
   <head>
     <title>Login page</title>
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"/>
@@ -22,5 +22,6 @@
     <p>
                 <a href="/register" th:href="@{/register}" class="btn btn-large btn-success">New user? Register</a>
     </p>
+    <div th:replace="fragments/footer :: footer"/>
   </body>
 </html>

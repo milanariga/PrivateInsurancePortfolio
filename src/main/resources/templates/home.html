@@ -4,38 +4,18 @@
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
 <body>
-...
-<div th:replace="fragments/header :: header">
-    <!-- ============================================================================ -->
-    <!-- This content is only used for static prototyping purposes (natural templates)-->
-    <!-- and is therefore entirely optional, as this markup fragment will be included -->
-    <!-- from "fragments/header.html" at runtime.                                     -->
-    <!-- ============================================================================ -->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Your insurance</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
+<div th:replace="fragments/header :: header"/>
 <div class="container">
     <div class="hero-unit">
-        <h1>Test</h1>
+        <h1>Private Insurance portfolio management app</h1>
         <p>
-            Private Insurance portfolio management app
+            Login to access your private portfolio and manage insurance issues
         </p>
         <p>
             <a href="/main" th:href="@{/main}" class="btn btn-large btn-success">Login</a>
         </p>
     </div>
-    <div th:replace="fragments/footer :: footer">&copy; 2021</div>
+    <div th:replace="fragments/footer :: footer"/>
 </div>
-...
 </body>
 </html>
