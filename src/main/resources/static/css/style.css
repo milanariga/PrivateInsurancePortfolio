@@ -1,6 +1,5 @@
 body{
     min-width: 320px;
-    margin: 25px;
     font-size: 16px;
     font-family: 'Raleway', sans-serif;
     color: #3E3D3D;
@@ -10,6 +9,31 @@ h1{
     font-size: 24px;
     font-family: 'Raleway', sans-serif;
     color: #530917;
+    margin-left: 10px;
+    margin-bottom: 30px;
+}
+
+table, th, td {
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+th{
+    height: 50px;
+    background-color: #EFF3FD;
+    color: #000;
+}
+
+td{
+    padding: 15px;
 }
 
 a{

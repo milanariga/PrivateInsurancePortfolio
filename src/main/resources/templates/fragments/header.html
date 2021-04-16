@@ -11,6 +11,7 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
 <!--                <span class="icon-bar"></span>-->
             </button>
             <a class="navbar-brand">Insurance Portfolio</a>
@@ -20,8 +21,14 @@
                 <li th:classappend="${module == 'home' ? 'active' : ''}">
                     <a href="#" th:href="@{/main}">Home</a>
                 </li>
+<!--                <li th:classappend="${module == 'policies' ? 'active' : ''}">-->
+<!--                    <a href="#" th:href="@{/main}">Policies</a>-->
+<!--                </li>-->
                 <li th:classappend="${module == 'vehicles' ? 'active' : ''}">
                     <a href="#" th:href="@{/vehicles}">Vehicles</a>
+                </li>
+                <li th:classappend="${module == 'properties' ? 'active' : ''}">
+                    <a href="#" th:href="@{/properties}">Properties</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
