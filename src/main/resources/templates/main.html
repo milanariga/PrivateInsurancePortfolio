@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Private Insurance portfolio</title>
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
 <div th:replace="fragments/header :: header"/>
-<div>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign out"/>
-    </form>
-</div>
 <h1>Main page: list of vehicles</h1>
-
+<div th:if="${#authorization.expression('isAuthenticated()')}">
 <table>
     <tr>
         <th>ID</th>
@@ -31,6 +27,10 @@
         <td th:text="${vehicle.regNo}">MD3267</td>
     </tr>
 </table>
+</div>
+<div th:if="${#authorization.expression('!isAuthenticated()')}">
+    Login to access
+</div>
 <div th:replace="fragments/footer :: footer"/>
 </body>
 </html>
