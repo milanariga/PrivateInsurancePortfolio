@@ -108,6 +108,8 @@ public class PrivateInsurancePortfolioApplication {
 					1000000.0,
 					david);
 
+			mtplPolicy.setInsuredVehicles(car);
+			mtplPolicy.setInsuredVehicles(tractor);
 			policyRepository.save(mtplPolicy);
 
 			Installment firstPaym = new Installment(

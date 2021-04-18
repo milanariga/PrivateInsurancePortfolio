@@ -1,7 +1,5 @@
 package com.ana.PrivateInsurancePortfolio.model;
 
-import com.ana.PrivateInsurancePortfolio.repositories.InstallmentRepository;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -44,10 +42,10 @@ public class Policy {
     @Convert(converter = PolicyStatusConverter.class)
     private PolicyStatus status;
 
-//    @ManyToMany
-//    @JoinTable(name = "policy_objects", joinColumns = @JoinColumn(name = "policy_id"),
-//                inverseJoinColumns = @JoinColumn(name = "vehicle_id"))
-//    private Set<Vehicle> insuredObjects = new HashSet<>(); //object IDs
+    @ManyToMany
+    @JoinTable(name = "policy_objects", joinColumns = @JoinColumn(name = "policy_id"),
+                inverseJoinColumns = @JoinColumn(name = "vehicle_id"))
+    private Set<Vehicle> insuredVehicles = new HashSet<>(); //object IDs
 
     @Column(
             name = "start_date",
@@ -160,13 +158,13 @@ public class Policy {
         this.status = status;
     }
 
-//    public Set<Vehicle> getInsuredObjects() {
-//        return insuredObjects;
-//    }
-//
-//    public void setInsuredObjects(Set<Vehicle> insuredObjects) {
-//        this.insuredObjects = insuredObjects;
-//    }
+    public Set<Vehicle> getInsuredVehicles() {
+        return insuredVehicles;
+    }
+
+    public void setInsuredVehicles(Vehicle insuredVehicle) {
+        getInsuredVehicles().add(insuredVehicle);
+    }
 
     public Date getStartDate() {
         return startDate;

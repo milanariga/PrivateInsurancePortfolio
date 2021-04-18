@@ -10,7 +10,7 @@
 <body>
 <div th:replace="fragments/header :: header"/>
 <h1>Main page: list of vehicles</h1>
-<div th:if="${#authorization.expression('isAuthenticated()')}">
+
 <table>
     <tr>
         <th>ID</th>
@@ -27,10 +27,27 @@
         <td th:text="${vehicle.regNo}">MD3267</td>
     </tr>
 </table>
-</div>
-<div th:if="${#authorization.expression('!isAuthenticated()')}">
-    Login to access
-</div>
+
+<h1>Property List</h1>
+
+<table>
+    <tr>
+        <th>Address</th>
+        <th>Construction year</th>
+        <th>Area</th>
+        <th>Number of floors</th>
+        <th>Owner</th>
+    </tr>
+    <tr th:each = "property : ${properties}">
+        <td th:text="${property.address}">Some address</td>
+        <td th:text="${property.constrYear}">2018</td>
+        <td th:text="${property.area}">35.00</td>
+        <td th:text="${property.numOfFloor}">1</td>
+        <td th:text="${property.owner.personId}">44</td>
+    </tr>
+</table>
+
+
 <div th:replace="fragments/footer :: footer"/>
 </body>
 </html>

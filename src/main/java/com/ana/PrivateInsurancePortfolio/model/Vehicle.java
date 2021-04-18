@@ -64,7 +64,7 @@ public class Vehicle {
     )
     private String certNo;
 
-//    @ManyToMany(mappedBy = "insuredObjects")
+//    @ManyToMany(mappedBy = "insuredVehicles")
 //    private Set<Policy> policies = new HashSet<>();
 
     @ManyToOne
