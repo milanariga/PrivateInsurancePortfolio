@@ -134,8 +134,24 @@ public class Policy {
         this.number = number;
     }
 
-    public PolicyType getPolicyType() {
-        return policyType;
+    public String getPolicyType() {
+        switch (policyType) {
+            case MOTOR_THIRD_PARTY_LIABILITY:
+                return "MTPL";
+            case GENERAL_LIABILITY:
+                return "General Liability";
+            case PROPERTY_DAMAGE:
+                return "Property Insurance";
+            case ACCIDENT:
+                return "Accident Insurance";
+            case MOTOR_OWN_DAMAGE:
+                return "CASCO";
+            case TRAVEL:
+                return "Travel Insurance";
+            case LIFE_INSURANCE:
+                return "Life Insurance";
+            default: return "Unknown Policy Type";
+        }
     }
 
     public void setPolicyType(PolicyType policyType) {
