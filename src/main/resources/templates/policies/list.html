@@ -24,10 +24,11 @@
         <td th:text="${policy.policyType}">MOD</td>
         <td th:text="${#dates.format(policy.startDate, 'dd-MM-yyyy')}">01.01.2021</td>
         <td th:text="${#dates.format(policy.endDate, 'dd-MM-yyyy')}">31.12.2021</td>
-        <td th:text="${policy.premium}">100.00</td>
-<!--        <td th:text="${#strings(policy.insuredVehicles.getRegNo())}">Car</td>-->
-        <td th:each = "vehicle : ${policy.insuredVehicles}">
-            <li th:text="${vehicle.regNo}">AA123</li>
+        <td th:text="${#numbers.formatDecimal(policy.premium, 1, 2, 'DEFAULT')}">100.00</td>
+        <td>
+            <div th:each = "vehicle : ${policy.insuredVehicles}">
+            <span th:text="${vehicle.regNo}">AA123</span>
+            </div>
         </td>
     </tr>
 </table>
