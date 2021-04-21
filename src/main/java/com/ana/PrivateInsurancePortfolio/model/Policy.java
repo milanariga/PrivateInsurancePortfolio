@@ -43,9 +43,14 @@ public class Policy {
     private PolicyStatus status;
 
     @ManyToMany
-    @JoinTable(name = "policy_objects", joinColumns = @JoinColumn(name = "policy_id"),
+    @JoinTable(name = "policy_vehicles", joinColumns = @JoinColumn(name = "policy_id"),
                 inverseJoinColumns = @JoinColumn(name = "vehicle_id"))
     private Set<Vehicle> insuredVehicles = new HashSet<>(); //object IDs
+
+    @ManyToMany
+    @JoinTable(name = "policy_properties", joinColumns = @JoinColumn(name = "policy_id"),
+            inverseJoinColumns = @JoinColumn(name = "property_id"))
+    private Set<Property> insuredProperties = new HashSet<>(); //object IDs
 
     @Column(
             name = "start_date",
@@ -180,6 +185,14 @@ public class Policy {
 
     public void setInsuredVehicles(Vehicle insuredVehicle) {
         getInsuredVehicles().add(insuredVehicle);
+    }
+
+    public Set<Property> getInsuredProperties() {
+        return insuredProperties;
+    }
+
+    public void setInsuredProperties(Property insuredProperty) {
+        getInsuredProperties().add(insuredProperty);
     }
 
     public Date getStartDate() {

@@ -77,7 +77,7 @@ public class PrivateInsurancePortfolioApplication {
 			System.out.println(maria.getVehicles().toString());
 
 			Property testProperty = new Property(
-					"some address",
+					"Unknown Str. 25",
 					2015,
 					150.5,
 					1,
@@ -123,6 +123,23 @@ public class PrivateInsurancePortfolioApplication {
 
 			installmentRepository.save(firstPaym);
 			mtplPolicy.addInstallment(firstPaym);
+
+			Policy pdPolicy = new Policy(
+					"PD1111",
+					PolicyType.PROPERTY_DAMAGE,
+					ObjectType.PROPERTY,
+					PolicyStatus.ACTIVE,
+					startDate,
+					endDate,
+					200.00,
+					2,
+					PaymentStatus.UNAVAILABLE,
+					200000.00,
+					david
+			);
+
+			pdPolicy.setInsuredProperties(testProperty);
+			policyRepository.save(pdPolicy);
 
 		};
 	}

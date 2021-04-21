@@ -26,9 +26,16 @@
         <td th:text="${#dates.format(policy.endDate, 'dd-MM-yyyy')}">31.12.2021</td>
         <td th:text="${#numbers.formatDecimal(policy.premium, 1, 2, 'DEFAULT')}">100.00</td>
         <td>
-            <div th:each = "vehicle : ${policy.insuredVehicles}">
-            <span th:text="${vehicle.regNo}">AA123</span>
-            </div>
+            <span th:if="${policy.insuredVehicles != null}">
+                <div th:each = "vehicle : ${policy.insuredVehicles}">
+                    <span th:text="${vehicle.regNo}">AA123</span>
+                </div>
+            </span>
+            <span th:if="${policy.insuredProperties != null}">
+                <div th:each = "property : ${policy.insuredProperties}">
+                    <span th:text="${property.address}">Some address</span>
+                </div>
+            </span>
         </td>
     </tr>
 </table>
