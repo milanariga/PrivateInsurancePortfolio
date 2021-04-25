@@ -2,6 +2,7 @@ package com.ana.PrivateInsurancePortfolio;
 
 import com.ana.PrivateInsurancePortfolio.model.*;
 import com.ana.PrivateInsurancePortfolio.repositories.*;
+import com.ana.PrivateInsurancePortfolio.service.VehicleService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,7 +21,7 @@ public class PrivateInsurancePortfolioApplication {
 	@Bean
 	CommandLineRunner commandLineRunner(UserRepository userRepository,
 										PersonRepository personRepository,
-										VehicleRepository vehicleRepository,
+										VehicleService vehicleService,
 										PropertyRepository propertyRepository,
 										PolicyRepository policyRepository,
 										InstallmentRepository installmentRepository){
@@ -50,7 +51,6 @@ public class PrivateInsurancePortfolioApplication {
 
 			jake.getRelatedPersons().add(maria);
 			jake.getRelatedPersons().add(david);
-			System.out.println(jake.getRelatedPersons().toString());
 
 			Vehicle car = new Vehicle(VehicleType.CAR,
 					"Bmw",
@@ -67,9 +67,10 @@ public class PrivateInsurancePortfolioApplication {
 					"T4566LV",
 					"A879899",
 					maria);
+			tractor.setActive(false);
 
-			vehicleRepository.save(car);
-			vehicleRepository.save(tractor);
+			vehicleService.saveVehicle(car);
+			vehicleService.saveVehicle(tractor);
 
 			maria.addVehicle(car);
 			maria.addVehicle(tractor);

@@ -17,6 +17,7 @@
         <th>Make</th>
         <th>Model</th>
         <th>Reg No</th>
+        <th>Change</th>
     </tr>
     <tr th:each = "vehicle : ${vehicles}">
         <td th:text="${vehicle.vehicleId}">123</td>
@@ -24,6 +25,8 @@
         <td th:text="${vehicle.make}">Toyota</td>
         <td th:text="${vehicle.model}">RAV4</td>
         <td th:text="${vehicle.regNo}">MD3267</td>
+        <td><a th:href="@{vehicle-update/{id}(id=${vehicle.vehicleId})}">Edit</a>
+            <a th:href="@{vehicle-delete/{id}(id=${vehicle.vehicleId})}">Delete</a></td>
     </tr>
 </table>
 </body>

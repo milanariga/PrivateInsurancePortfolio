@@ -1,7 +1,9 @@
 package com.ana.PrivateInsurancePortfolio.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,7 +27,13 @@ public class Vehicle {
     )
     private Long vehicleId;
 
-    //@Enumerated
+    @Column(
+            name = "active",
+            nullable = false,
+            columnDefinition = "BOOLEAN"
+    )
+    private boolean active = true;
+
     @Convert(converter = VehicleTypeConverter.class)
     private VehicleType type;
 
@@ -64,8 +72,8 @@ public class Vehicle {
     )
     private String certNo;
 
-//    @ManyToMany(mappedBy = "insuredVehicles")
-//    private Set<Policy> policies = new HashSet<>();
+    @ManyToMany(mappedBy = "insuredVehicles")
+    private List<Policy> policies = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(
@@ -93,6 +101,14 @@ public class Vehicle {
 
     public void setVehicleId(Long vehicleId) {
         this.vehicleId = vehicleId;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public VehicleType getType() {
@@ -143,13 +159,23 @@ public class Vehicle {
         this.certNo = certNo;
     }
 
-//    public Set<Policy> getPolicies() {
-//        return policies;
-//    }
-//
-//    public void setPolicies(Set<Policy> policies) {
-//        this.policies = policies;
-//    }
+    public List<Policy> getPolicies() {
+        return policies;
+    }
+
+    public void setPolicies(List<Policy> policy) {
+        this.policies = policy;
+    }
+
+    public void addPolicy(Policy policy){
+        this.policies.add(policy);
+        policy.getInsuredVehicles().add(this);
+    }
+
+    public void removePolicy(Policy policy){
+        this.policies.remove(policy);
+        policy.getInsuredVehicles().remove(this);
+    }
 
     public Person getOwner() {
         return owner;
