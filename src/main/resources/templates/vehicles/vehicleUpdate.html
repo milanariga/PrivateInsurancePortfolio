@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"/>
+    <title>Vehicle Update</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<h1>Edit the vehicle</h1>
+<form action="#" th:action="@{/saveVehicle}" th:object="${vehicle}"
+      method="POST">
+
+    <!-- Add hidden form field to handle update -->
+    <input type="hidden" th:field="*{vehicleId}" />
+
+    <input type="text" th:field="*{regNo}" class="form-control mb-4 col-4">
+
+    <input type="text" th:field="*{certNo}" class="form-control mb-4 col-4">
+
+    <select th:field="*{type}" class="form-control mb-4 col-4">
+        <option th:each="type : ${T(com.ana.PrivateInsurancePortfolio.model.VehicleType).values()}"
+                th:value="${type}"
+                th:text="${type}">
+        </option>
+    </select>
+
+    <input type="text" th:field="*{make}" class="form-control mb-4 col-4">
+
+    <input type="text" th:field="*{model}" class="form-control mb-4 col-4">
+
+    <input type="text" th:field="*{makeYear}" class="form-control mb-4 col-4">
+
+    <button type="submit" class="btn btn-info col-2"> Update Vehicle</button>
+</form>
+
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>

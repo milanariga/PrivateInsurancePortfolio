@@ -33,4 +33,8 @@ public class VehicleService {
     public void saveVehicle(Vehicle vehicle){
         vehicleRepository.save(vehicle);
     }
+
+    public Vehicle findById(Long id){
+        return vehicleRepository.getOne(id);
+    }
 }

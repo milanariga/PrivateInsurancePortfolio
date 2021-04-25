@@ -25,8 +25,8 @@
         <td th:text="${vehicle.make}">Toyota</td>
         <td th:text="${vehicle.model}">RAV4</td>
         <td th:text="${vehicle.regNo}">MD3267</td>
-        <td><a th:href="@{vehicle-update/{id}(id=${vehicle.vehicleId})}">Edit</a>
-            <a th:href="@{vehicle-delete/{id}(id=${vehicle.vehicleId})}">Delete</a></td>
+        <td><a th:href="@{updateVehicle/{id}(id=${vehicle.vehicleId})}">Edit</a>
+            <a th:href="@{deleteVehicle/{id}(id=${vehicle.vehicleId})}">Delete</a></td>
     </tr>
 </table>
 </body>
