@@ -28,6 +28,6 @@ public class VehicleController {
     @GetMapping("/vehicle-delete/{id}")
     public String deleteVehicle(@PathVariable("id") Long id){
         vehicleService.deleteVehicle(id);
-        return "redirect:vehicles/vehiclesList";
+        return "redirect:/vehicles";
     }
 }

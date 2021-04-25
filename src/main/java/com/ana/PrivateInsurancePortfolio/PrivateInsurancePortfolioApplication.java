@@ -67,7 +67,7 @@ public class PrivateInsurancePortfolioApplication {
 					"T4566LV",
 					"A879899",
 					maria);
-			tractor.setActive(false);
+			//tractor.setActive(false);
 
 			vehicleService.saveVehicle(car);
 			vehicleService.saveVehicle(tractor);

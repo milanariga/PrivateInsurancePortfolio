@@ -25,7 +25,9 @@ public class VehicleService {
     }
 
     public void deleteVehicle(Long id){
-        vehicleRepository.findById(id).get().setActive(false);
+        Vehicle veh = vehicleRepository.getOne(id);
+        veh.setActive(false);
+        vehicleRepository.save(veh);
     }
 
     public void saveVehicle(Vehicle vehicle){
