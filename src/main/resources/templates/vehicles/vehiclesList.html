@@ -5,6 +5,7 @@
     <title>Private Insurance portfolio</title>
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 </head>
 <body>
 <div th:replace="fragments/header :: header">Header</div>
@@ -25,8 +26,8 @@
         <td th:text="${vehicle.make}">Toyota</td>
         <td th:text="${vehicle.model}">RAV4</td>
         <td th:text="${vehicle.regNo}">MD3267</td>
-        <td><a th:href="@{updateVehicle/{id}(id=${vehicle.vehicleId})}">Edit</a>
-            <a th:href="@{deleteVehicle/{id}(id=${vehicle.vehicleId})}">Delete</a></td>
+        <td><a th:href="@{updateVehicle/{id}(id=${vehicle.vehicleId})}" class="btn btn-primary"><i class="far fa-edit"></i></a>
+            <a th:href="@{deleteVehicle/{id}(id=${vehicle.vehicleId})}" class="btn btn-primary"><i class="far fa-trash-alt"></i></a></td>
     </tr>
 </table>
 </body>
