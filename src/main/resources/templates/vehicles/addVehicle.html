@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <title>Add vehicle</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<h1>Add new vehicle</h1>
+
+<form action="#" th:action="@{/addVehicle}" th:object="${vehicle}" method="post">
+    <div class="form-group row">
+        <label for="regNo" class="col-sm-2 col-form-label">Registration number</label>
+        <div class="col-xs-3">
+            <input type="text" class="form-control" id="regNo" placeholder="RegNo" name="regNo">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="certNo" class="col-sm-2 col-form-label">Certificate number</label>
+        <div class="col-xs-3">
+            <input type="text" class="form-control" id="certNo" placeholder="Certificate" name="certNo">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="type" class="col-sm-2 col-form-label">Make</label>
+        <div class="col-xs-3">
+<!--            <input type="text" class="form-control" id="type" placeholder="Make" name="type">-->
+            <select type="text" class="form-control" id="type" placeholder="Make" name="type">
+                <option selected>Choose...</option>
+                <option th:each="type : ${T(com.ana.PrivateInsurancePortfolio.model.VehicleType).values()}"
+                        th:value="${type}"
+                        th:text="${type}">
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="make" class="col-sm-2 col-form-label">Make</label>
+        <div class="col-xs-3">
+            <input type="text" class="form-control" id="make" placeholder="Make" name="make">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="model" class="col-sm-2 col-form-label">Model</label>
+        <div class="col-xs-3">
+            <input type="text" class="form-control" id="model" placeholder="Model" name="model">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="year" class="col-sm-2 col-form-label">Year</label>
+        <div class="col-xs-3">
+            <input type="number" class="form-control" id="year" placeholder="Year" name="makeYear">
+        </div>
+    </div>
+    <div>
+        <input class="btn btn-large btn-success" type="submit" value="Save"/>
+    </div>
+<!--    <div><label> RegNo: <input type="text" name="regNo" class="form-control mb-4 col-4"/></label></div>-->
+<!--    <div><label> Last Name: <input type="text" name="lastName"/> </label></div>-->
+<!--    <div><label> Username: <input type="text" name="username"/> </label></div>-->
+<!--    <div><label> Password: <input type="password" name="password"/> </label></div>-->
+<!--    <div><label> Email: <input type="email" name="email"/> </label></div>-->
+<!--    <div><input class="btn btn-large btn-success" type="submit" value="Register"/></div>-->
+
+</form>
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>

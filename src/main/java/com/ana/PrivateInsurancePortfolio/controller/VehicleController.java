@@ -30,6 +30,13 @@ public class VehicleController {
         return "redirect:/vehicles";
     }
 
+    @GetMapping("/addVehicle")
+    public String addVehicle(Model model){
+        Vehicle vehicle = new Vehicle();
+        model.addAttribute("vehicle", vehicle);
+        return "vehicles/addVehicle";
+    }
+
     @PostMapping("/saveVehicle")
     public String saveVehicle(@ModelAttribute("vehicle") Vehicle vehicle){
         vehicleService.saveVehicle(vehicle);
