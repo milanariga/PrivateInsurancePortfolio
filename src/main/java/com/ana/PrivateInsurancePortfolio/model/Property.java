@@ -1,7 +1,6 @@
 package com.ana.PrivateInsurancePortfolio.model;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 public class Property {
@@ -57,7 +56,7 @@ public class Property {
             //referencedColumnName = "person_id",
             foreignKey = @ForeignKey(name = "FK_property_owner_id")
     )
-    private Person owner;
+    private SystemUser owner;
 
     //@ManyToMany(mappedBy = "policyId")
     //private Set<Policy> policies;
@@ -65,7 +64,7 @@ public class Property {
     public Property() {
     }
 
-    public Property(String address, int constrYear, Double area, int numOfFloor, Person owner//, Set<Policy> policies
+    public Property(String address, int constrYear, Double area, int numOfFloor, SystemUser owner//, Set<Policy> policies
                     ) {
         this.address = address;
         this.constrYear = constrYear;
@@ -124,11 +123,11 @@ public class Property {
 //    }
 
 
-    public Person getOwner() {
+    public SystemUser getOwner() {
         return owner;
     }
 
-    public void setOwner(Person owner) {
+    public void setOwner(SystemUser owner) {
         this.owner = owner;
     }
 

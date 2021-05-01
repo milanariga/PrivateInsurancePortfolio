@@ -68,21 +68,13 @@ public class SystemUser {
             columnDefinition = "VARCHAR(100)"
     )
     private String mobile;
-//    @OneToMany(mappedBy = "user")
-//    private Set<Policy> policies;
-//
-//    @OneToMany(mappedBy = "user")
-//    private Set<Property> property;
-//
-//    @OneToMany(mappedBy = "user")
-//    private Set<Vehicle> vehicles;
-
-    @Column(
-            name = "related_persons"
-    )
     @OneToMany
     @JoinColumn(name = "user_id")
-    private Set<Person> relatedPersons = new HashSet<>();
+    private Set<Vehicle> vehicles = new HashSet<>();
+
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private Set<Property> properties = new HashSet<>();
 
     @Column(
             name = "active",
@@ -169,36 +161,28 @@ public class SystemUser {
         this.active = active;
     }
 
-    //    public Set<Policy> getPolicies() {
-//        return policies;
-//    }
-//
-//    public void setPolicies(Set<Policy> policies) {
-//        this.policies = policies;
-//    }
-//
-//    public Set<Property> getProperty() {
-//        return property;
-//    }
-//
-//    public void setProperty(Set<Property> property) {
-//        this.property = property;
-//    }
-//
-//    public Set<Vehicle> getVehicles() {
-//        return vehicles;
-//    }
-//
-//    public void setVehicles(Set<Vehicle> vehicles) {
-//        this.vehicles = vehicles;
-//    }
-
-    public Set<Person> getRelatedPersons() {
-        return relatedPersons;
+    public Set<Vehicle> getVehicles() {
+        return vehicles;
     }
 
-    public void setRelatedPersons(Set<Person> relatedPersons) {
-        this.relatedPersons = relatedPersons;
+    public void setVehicles(Set<Vehicle> vehicles) {
+        this.vehicles = vehicles;
+    }
+
+    public void addVehicle(Vehicle vehicle){
+        this.vehicles.add(vehicle);
+    }
+
+    public Set<Property> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(Set<Property> properties) {
+        this.properties = properties;
+    }
+
+    public void addProperty(Property property){
+        this.properties.add(property);
     }
 
     @Override

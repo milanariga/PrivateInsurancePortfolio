@@ -100,7 +100,7 @@ public class Policy {
             name = "policyholder",
             foreignKey = @ForeignKey(name = "FK_person_id")
     )
-    private Person policyHolder;
+    private SystemUser policyHolder;
 
     public Policy() {
     }
@@ -109,7 +109,7 @@ public class Policy {
                   Date startDate, Date endDate, Double premium,
                   int noOfInstallments,
                   PaymentStatus policyPaymentStatus,
-                  Double sumInsured, Person policyHolder) {
+                  Double sumInsured, SystemUser policyHolder) {
         this.number = number;
         this.policyType = policyType;
         this.objectType = objectType;
@@ -266,11 +266,11 @@ public class Policy {
         System.out.println(policyPaymentStatus.toString());
     }
 
-    public Person getPolicyHolder() {
+    public SystemUser getPolicyHolder() {
         return policyHolder;
     }
 
-    public void setPolicyHolder(Person policyHolder) {
+    public void setPolicyHolder(SystemUser policyHolder) {
         this.policyHolder = policyHolder;
     }
 

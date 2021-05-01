@@ -20,7 +20,6 @@ public class PrivateInsurancePortfolioApplication {
 
 	@Bean
 	CommandLineRunner commandLineRunner(UserRepository userRepository,
-										PersonRepository personRepository,
 										VehicleService vehicleService,
 										PropertyRepository propertyRepository,
 										PolicyRepository policyRepository,
@@ -35,30 +34,13 @@ public class PrivateInsurancePortfolioApplication {
 					"+37122222222", true);
 			userRepository.save(jake);
 
-			Person maria = new Person(
-					"Maria",
-					"Brown",
-					"ID21934348987",
-					jake);
-			personRepository.save(maria);
-
-			Person david = new Person(
-					"David",
-					"Brown",
-					"ID219344444",
-					jake);
-			personRepository.save(david);
-
-			jake.getRelatedPersons().add(maria);
-			jake.getRelatedPersons().add(david);
-
 			Vehicle car = new Vehicle(VehicleType.CAR,
 					"Bmw",
 					"X6",
 					2018,
 					"AR7676",
 					"AF7777777",
-					maria);
+					jake);
 
 			Vehicle tractor = new Vehicle(VehicleType.TRACTOR,
 					"BELARUS",
@@ -66,29 +48,27 @@ public class PrivateInsurancePortfolioApplication {
 					1990,
 					"T4566LV",
 					"A879899",
-					maria);
+					jake);
 			//tractor.setActive(false);
 
 			vehicleService.saveVehicle(car);
 			vehicleService.saveVehicle(tractor);
 
-			maria.addVehicle(car);
-			maria.addVehicle(tractor);
+			jake.addVehicle(car);
+			jake.addVehicle(tractor);
 
-			System.out.println(maria.getVehicles().toString());
 
 			Property testProperty = new Property(
 					"Unknown Str. 25",
 					2015,
 					150.5,
 					1,
-					david
+					jake
 			);
 
 			propertyRepository.save(testProperty);
 
-			david.addProperty(testProperty);
-			System.out.println(david.getProperties().toString());
+			jake.addProperty(testProperty);
 
 			String pattern = "yyyy-MM-dd";
         	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -107,7 +87,7 @@ public class PrivateInsurancePortfolioApplication {
 					1,
 					PaymentStatus.UNAVAILABLE,
 					1000000.0,
-					david);
+					jake);
 
 			mtplPolicy.setInsuredVehicles(car);
 			mtplPolicy.setInsuredVehicles(tractor);
@@ -136,7 +116,7 @@ public class PrivateInsurancePortfolioApplication {
 					2,
 					PaymentStatus.UNAVAILABLE,
 					200000.00,
-					david
+					jake
 			);
 
 			pdPolicy.setInsuredProperties(testProperty);

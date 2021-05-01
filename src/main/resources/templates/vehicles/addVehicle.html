@@ -11,7 +11,7 @@
 <div th:replace="fragments/header :: header"/>
 <h1>Add new vehicle</h1>
 
-<form action="#" th:action="@{/addVehicle}" th:object="${vehicle}" method="post">
+<form action="#" th:action="@{/saveVehicle}" th:object="${vehicle}" method="post">
     <div class="form-group row">
         <label for="regNo" class="col-sm-2 col-form-label">Registration number</label>
         <div class="col-xs-3">
@@ -58,12 +58,6 @@
     <div>
         <input class="btn btn-large btn-success" type="submit" value="Save"/>
     </div>
-<!--    <div><label> RegNo: <input type="text" name="regNo" class="form-control mb-4 col-4"/></label></div>-->
-<!--    <div><label> Last Name: <input type="text" name="lastName"/> </label></div>-->
-<!--    <div><label> Username: <input type="text" name="username"/> </label></div>-->
-<!--    <div><label> Password: <input type="password" name="password"/> </label></div>-->
-<!--    <div><label> Email: <input type="email" name="email"/> </label></div>-->
-<!--    <div><input class="btn btn-large btn-success" type="submit" value="Register"/></div>-->
 
 </form>
 <div th:replace="fragments/footer :: footer"/>

@@ -2,9 +2,7 @@ package com.ana.PrivateInsurancePortfolio.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "vehicle")
@@ -80,12 +78,12 @@ public class Vehicle {
             name = "person_id",
             foreignKey = @ForeignKey(name = "FK_vehicle_owner_id")
     )
-    private Person owner;
+    private SystemUser owner;
 
     public Vehicle() {
     }
 
-    public Vehicle(VehicleType type, String make, String model, int makeYear, String regNo, String certNo, Person owner) {
+    public Vehicle(VehicleType type, String make, String model, int makeYear, String regNo, String certNo, SystemUser owner) {
         this.type = type;
         this.make = make;
         this.model = model;
@@ -177,11 +175,11 @@ public class Vehicle {
         policy.getInsuredVehicles().remove(this);
     }
 
-    public Person getOwner() {
+    public SystemUser getOwner() {
         return owner;
     }
 
-    public void setOwner(Person owner) {
+    public void setOwner(SystemUser owner) {
         this.owner = owner;
     }
 
