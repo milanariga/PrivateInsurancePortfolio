@@ -58,9 +58,4 @@ public class VehicleController {
         return "vehicles/updateVehicle";
     }
 
-    @PostMapping("/vehicle-update")
-    public String updateVehicle(@ModelAttribute Vehicle vehicle, Model model){
-        model.addAttribute("vehicle", vehicle);
-        return "redirect:/vehicles";
-    }
 }
