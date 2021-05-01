@@ -44,4 +44,12 @@ a:hover{
     color: #232CA1;
 }
 
+form{
+    margin-left: 10px;
+}
+
+button{
+    margin-top: 10px;
+}
+
 
