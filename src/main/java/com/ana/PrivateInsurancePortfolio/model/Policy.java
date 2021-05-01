@@ -80,12 +80,6 @@ public class Policy {
     )
     private int noOfInstallments;
 
-    @OneToMany
-    @JoinColumn(
-            name = "policy_id"
-    )
-    private Set<Installment> installments = new HashSet<>();
-
     @Convert(converter = PaymentStatusConverter.class)
     private PaymentStatus policyPaymentStatus;
 
@@ -235,15 +229,6 @@ public class Policy {
         this.sumInsured = sumInsured;
     }
 
-    public Set<Installment> getInstallments() {
-        return installments;
-    }
-
-    public void setInstallments(Set<Installment> installments) {
-        //this.installments = getInstallments().addAll(installments);
-        this.installments = installments;
-    }
-
     public PaymentStatus getPolicyPaymentStatus() {
 //        PaymentStatus policyPaymentStatus = PaymentStatus.UNAVAILABLE;
 //        if (this.noOfInstallments == 1){
@@ -257,13 +242,6 @@ public class Policy {
 
     public void setPolicyPaymentStatus(PaymentStatus policyPaymentStatus) {
         this.policyPaymentStatus = policyPaymentStatus;
-    }
-
-    public void addInstallment(Installment installment){
-        this.installments.add(installment);
-        setPolicyPaymentStatus(installment.getPaymentStatus());
-        System.out.println(installment.getPaymentStatus().toString());
-        System.out.println(policyPaymentStatus.toString());
     }
 
     public SystemUser getPolicyHolder() {

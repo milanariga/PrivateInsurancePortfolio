@@ -22,8 +22,7 @@ public class PrivateInsurancePortfolioApplication {
 	CommandLineRunner commandLineRunner(UserRepository userRepository,
 										VehicleService vehicleService,
 										PropertyRepository propertyRepository,
-										PolicyRepository policyRepository,
-										InstallmentRepository installmentRepository){
+										PolicyRepository policyRepository){
 		return args -> {
 			SystemUser jake = new SystemUser(
 					"Jake",
@@ -92,18 +91,6 @@ public class PrivateInsurancePortfolioApplication {
 			mtplPolicy.setInsuredVehicles(car);
 			mtplPolicy.setInsuredVehicles(tractor);
 			policyRepository.save(mtplPolicy);
-
-			Installment firstPaym = new Installment(
-					mtplPolicy,
-					1,
-					1,
-					120.0,
-					paymDate,
-					PaymentStatus.UNPAID
-			);
-
-			installmentRepository.save(firstPaym);
-			mtplPolicy.addInstallment(firstPaym);
 
 			Policy pdPolicy = new Policy(
 					"PD1111",

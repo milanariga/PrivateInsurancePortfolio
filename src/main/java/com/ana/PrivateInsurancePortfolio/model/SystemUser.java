@@ -69,7 +69,7 @@ public class SystemUser {
     )
     private String mobile;
     @OneToMany
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "person_id")
     private Set<Vehicle> vehicles = new HashSet<>();
 
     @OneToMany
