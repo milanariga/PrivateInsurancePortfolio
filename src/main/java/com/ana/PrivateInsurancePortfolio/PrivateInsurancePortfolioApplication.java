@@ -56,6 +56,37 @@ public class PrivateInsurancePortfolioApplication {
 			jake.addVehicle(car);
 			jake.addVehicle(tractor);
 
+			SystemUser mad = new SystemUser(
+					"Mady",
+					"Lake",
+					"s",
+					"s",
+					"mady@test.com",
+					"+37155555555", true);
+			userRepository.save(mad);
+
+			Vehicle mady_car = new Vehicle(VehicleType.CAR,
+					"Audi",
+					"X2",
+					2020,
+					"MADY",
+					"AF1111111",
+					mad);
+
+			Vehicle mady_moto = new Vehicle(VehicleType.MOTORCYCLE,
+					"Harley",
+					"Davidson",
+					2001,
+					"T111XX",
+					"A232432",
+					mad);
+			//tractor.setActive(false);
+
+			vehicleService.saveVehicle(mady_car);
+			vehicleService.saveVehicle(mady_moto);
+
+			jake.addVehicle(mady_car);
+			jake.addVehicle(mady_moto);
 
 			Property testProperty = new Property(
 					"Unknown Str. 25",

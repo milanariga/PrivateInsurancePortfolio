@@ -75,7 +75,7 @@ public class Vehicle {
 
     @ManyToOne
     @JoinColumn(
-            name = "person_id",
+            name = "user_id",
             foreignKey = @ForeignKey(name = "FK_vehicle_owner_id")
     )
     private SystemUser owner;

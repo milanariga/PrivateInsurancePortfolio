@@ -68,8 +68,9 @@ public class SystemUser {
             columnDefinition = "VARCHAR(100)"
     )
     private String mobile;
+
     @OneToMany
-    @JoinColumn(name = "person_id")
+    @JoinColumn(name = "user_id")
     private Set<Vehicle> vehicles = new HashSet<>();
 
     @OneToMany

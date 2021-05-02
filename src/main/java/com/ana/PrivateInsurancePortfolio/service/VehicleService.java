@@ -3,7 +3,6 @@ package com.ana.PrivateInsurancePortfolio.service;
 import com.ana.PrivateInsurancePortfolio.model.SystemUser;
 import com.ana.PrivateInsurancePortfolio.model.Vehicle;
 import com.ana.PrivateInsurancePortfolio.repositories.PolicyRepository;
-import com.ana.PrivateInsurancePortfolio.repositories.UserRepository;
 import com.ana.PrivateInsurancePortfolio.repositories.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,7 +27,15 @@ public class VehicleService {
     }
 
     public List<Vehicle> findAllByActiveTrue(){
-        return vehicleRepository.findByActiveTrue(true);
+        String username = "";
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        SystemUser owner = userService.findByUsername(username);
+        return vehicleRepository.findByUserIdAndActiveTrue(owner, true);
     }
 
     public void deleteVehicle(Long id){
