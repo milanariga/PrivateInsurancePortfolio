@@ -2,6 +2,7 @@ package com.ana.PrivateInsurancePortfolio.controller;
 
 import com.ana.PrivateInsurancePortfolio.repositories.PropertyRepository;
 import com.ana.PrivateInsurancePortfolio.repositories.VehicleRepository;
+import com.ana.PrivateInsurancePortfolio.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +16,7 @@ import java.util.Map;
 public class MainController {
 
     @Autowired
-    private VehicleRepository vehicleRepository;
+    private VehicleService vehicleService;
 
     @Autowired
     private PropertyRepository propertyRepository;
@@ -28,7 +29,7 @@ public class MainController {
 
     @GetMapping("/main")
     public String main(Map<String, Object> model){
-        model.put("vehicles", vehicleRepository.findAll());
+        model.put("vehicles", vehicleService.findAllByActiveTrue());
         model.put("properties", propertyRepository.findAll());
 
         return "main";
