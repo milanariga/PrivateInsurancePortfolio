@@ -8,8 +8,6 @@ public class ObjectTypeConverter implements AttributeConverter<ObjectType, Strin
         switch (objectType){
             case VEHICLE:
                 return "V";
-            case PERSON:
-                return "P";
             case PROPERTY:
                 return "H";
             default:throw new IllegalArgumentException("Unknown object " + objectType);
@@ -21,8 +19,6 @@ public class ObjectTypeConverter implements AttributeConverter<ObjectType, Strin
         switch (s){
             case "V":
                 return ObjectType.VEHICLE;
-            case "P":
-                return ObjectType.PERSON;
             case "H":
                 return ObjectType.PROPERTY;
             default: throw new IllegalArgumentException("Unknown object " + s);

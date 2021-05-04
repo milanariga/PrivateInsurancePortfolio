@@ -1,9 +1,9 @@
 package com.ana.PrivateInsurancePortfolio.service;
 
+
+import com.ana.PrivateInsurancePortfolio.model.Property;
 import com.ana.PrivateInsurancePortfolio.model.SystemUser;
-import com.ana.PrivateInsurancePortfolio.model.Vehicle;
-import com.ana.PrivateInsurancePortfolio.repositories.VehicleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ana.PrivateInsurancePortfolio.repositories.PropertyRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -11,19 +11,17 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class VehicleService {
+public class PropertyService {
 
-    private final VehicleRepository vehicleRepository;
+    private final PropertyRepository propertyRepository;
     private UserService userService;
 
-    @Autowired
-    public VehicleService(VehicleRepository vehicleRepository,
-                          UserService userService) {
-        this.vehicleRepository = vehicleRepository;
+    public PropertyService(PropertyRepository propertyRepository, UserService userService) {
+        this.propertyRepository = propertyRepository;
         this.userService = userService;
     }
 
-    public List<Vehicle> findAllByActiveTrue(){
+    public List<Property> findAllByActiveTrue(){
         String username = "";
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails) {
@@ -32,22 +30,22 @@ public class VehicleService {
             username = principal.toString();
         }
         SystemUser owner = userService.findByUsername(username);
-        return vehicleRepository.findByUserIdAndActiveTrue(owner, true);
+        return propertyRepository.findByUserIdAndActiveTrue(owner, true);
     }
 
-    public void deleteVehicle(Long id){
-        Vehicle veh = vehicleRepository.getOne(id);
-        veh.setActive(false);
-        vehicleRepository.save(veh);
+    public void deleteProperty(Long id){
+        Property property = propertyRepository.getOne(id);
+        property.setActive(false);
+        propertyRepository.save(property);
     }
 
-    public void saveVehicle(Vehicle vehicle){
-        vehicleRepository.save(vehicle);
+    public void saveProperty(Property property){
+        propertyRepository.save(property);
     }
 
-    public void saveNewVehicle(Vehicle vehicle){
+    public void saveNewProperty(Property property){
         String username = "";
-        if (vehicle.getOwner() == null) {
+        if (property.getOwner() == null) {
             Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             if (principal instanceof UserDetails) {
                 username = ((UserDetails) principal).getUsername();
@@ -56,11 +54,12 @@ public class VehicleService {
             }
         }
         SystemUser owner = userService.findByUsername(username);
-        vehicle.setOwner(owner);
-        vehicleRepository.save(vehicle);
+        property.setOwner(owner);
+        propertyRepository.save(property);
     }
 
-    public Vehicle findById(Long id){
-        return vehicleRepository.getOne(id);
+    public Property findById(Long id){
+        return propertyRepository.getOne(id);
     }
+
 }

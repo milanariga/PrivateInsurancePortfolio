@@ -1,6 +1,8 @@
 package com.ana.PrivateInsurancePortfolio.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Property {
@@ -21,6 +23,13 @@ public class Property {
             updatable = false
     )
     private Long propertyId;
+
+    @Column(
+            name = "active",
+            nullable = false,
+            columnDefinition = "BOOLEAN"
+    )
+    private boolean active = true;
 
     @Column(
             name = "address",
@@ -52,26 +61,24 @@ public class Property {
 
     @ManyToOne
     @JoinColumn(
-            name = "person_id",
-            //referencedColumnName = "person_id",
+            name = "user_id",
             foreignKey = @ForeignKey(name = "FK_property_owner_id")
     )
     private SystemUser owner;
 
-    //@ManyToMany(mappedBy = "policyId")
-    //private Set<Policy> policies;
+    @ManyToMany(mappedBy = "insuredProperties")
+    private List<Policy> policies = new ArrayList<>();
 
     public Property() {
     }
 
-    public Property(String address, int constrYear, Double area, int numOfFloor, SystemUser owner//, Set<Policy> policies
+    public Property(String address, int constrYear, Double area, int numOfFloor, SystemUser owner
                     ) {
         this.address = address;
         this.constrYear = constrYear;
         this.area = area;
         this.numOfFloor = numOfFloor;
         this.owner = owner;
-        //this.policies = policies;
     }
 
     public Long getPropertyId() {
@@ -80,6 +87,14 @@ public class Property {
 
     public void setPropertyId(Long propertyId) {
         this.propertyId = propertyId;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public String getAddress() {
@@ -114,14 +129,23 @@ public class Property {
         this.numOfFloor = numOfFloor;
     }
 
-//    public Set<Policy> getPolicies() {
-//        return policies;
-//    }
-//
-//    public void setPolicies(Set<Policy> policies) {
-//        this.policies = policies;
-//    }
+    public List<Policy> getPolicies() {
+        return policies;
+    }
 
+    public void setPolicies(List<Policy> policy) {
+        this.policies = policy;
+    }
+
+    public void addPolicy(Policy policy){
+        this.policies.add(policy);
+        policy.getInsuredProperties().add(this);
+    }
+
+    public void removePolicy(Policy policy){
+        this.policies.remove(policy);
+        policy.getInsuredProperties().remove(this);
+    }
 
     public SystemUser getOwner() {
         return owner;

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <title>Add property</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<h1>Add new property</h1>
+
+<form action="#" th:action="@{/saveProperty}" th:object="${property}" method="post">
+    <div class="form-group row">
+        <label for="address" class="col-sm-2 col-form-label">Property address</label>
+        <div class="col-xs-3">
+            <input type="text" class="form-control" id="address" placeholder="Address" name="address">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="const" class="col-sm-2 col-form-label">Year of construction</label>
+        <div class="col-xs-3">
+            <input type="number" class="form-control" id="const" placeholder="Construction" name="constrYear">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="area" class="col-sm-2 col-form-label">Area of property, m2</label>
+        <div class="col-xs-3">
+            <input type="number" class="form-control" id="area" placeholder="Area" name="area">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="floors" class="col-sm-2 col-form-label">Number of floors</label>
+        <div class="col-xs-3">
+            <input type="number" class="form-control" id="floors" placeholder="Floors" name="numOfFloor">
+        </div>
+    </div>
+    <div>
+        <input class="btn btn-large btn-success" type="submit" value="Save"/>
+    </div>
+
+</form>
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>

@@ -5,10 +5,15 @@
     <title>Private Insurance portfolio</title>
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 </head>
 <body>
 <div th:replace="fragments/header :: header">Header</div>
-<h1>Property List</h1>
+<h1>List of your properties</h1>
+<p>
+    <a th:href="@{/addProperty}" class="btn btn-primary"><i
+            class="fas fa-plus ml-2"> Add Property</i></a>
+</p>
 
 <table>
     <tr>
@@ -16,14 +21,15 @@
         <th>Construction year</th>
         <th>Area</th>
         <th>Number of floors</th>
-        <th>Owner</th>
+        <th>Change</th>
     </tr>
     <tr th:each = "property : ${properties}">
         <td th:text="${property.address}">Some address</td>
         <td th:text="${property.constrYear}">2018</td>
         <td th:text="${property.area}">35.00</td>
         <td th:text="${property.numOfFloor}">1</td>
-        <td th:text="${property.owner.userId}">44</td>
+        <td><a th:href="@{updateProperty/{id}(id=${property.propertyId})}" class="btn btn-warning"><i class="far fa-edit"></i></a>
+            <a th:href="@{deleteProperty/{id}(id=${property.propertyId})}" class="btn btn-danger"><i class="far fa-trash-alt"></i></a></td>
     </tr>
 </table>
 </body>

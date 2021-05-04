@@ -195,10 +195,6 @@ public class SystemUser {
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", mobile='" + mobile + '\'' +
-//                ", policies=" + policies +
-//                ", property=" + property +
-//                ", vehicles=" + vehicles +
-                //", persons=" + persons +
                 '}';
     }
 

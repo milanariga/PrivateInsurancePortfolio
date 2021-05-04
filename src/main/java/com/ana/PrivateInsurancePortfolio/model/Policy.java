@@ -92,7 +92,7 @@ public class Policy {
     @ManyToOne
     @JoinColumn(
             name = "policyholder",
-            foreignKey = @ForeignKey(name = "FK_person_id")
+            foreignKey = @ForeignKey(name = "FK_user_id")
     )
     private SystemUser policyHolder;
 

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <title>Property Update</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<h1>Edit the property</h1>
+<form action="#" th:action="@{/updateProperty}" th:object="${property}"
+      method="POST">
+
+    <!-- Add hidden form field to handle update -->
+    <input type="hidden" th:field="*{propertyId}" />
+    <input type="hidden" th:field="*{active}" />
+    <input type="hidden" th:field="*{owner}" />
+
+    <input type="text" th:field="*{address}" style="width:250px" class="form-control mb-4 col-4">
+
+    <input type="text" th:field="*{constrYear}" style="width:250px" class="form-control mb-4 col-4">
+
+    <input type="number" th:field="*{area}" style="width:250px" class="form-control mb-4 col-4">
+
+    <input type="number" th:field="*{numOfFloor}" style="width:250px" class="form-control mb-4 col-4">
+
+    <button type="submit" class="btn btn-info col-2">Update Property</button>
+</form>
+
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>
