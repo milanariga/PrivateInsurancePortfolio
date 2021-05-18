@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <title>Property Update</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<h1>Edit the policy</h1>
+<form action="#" th:action="@{/updatePolicy}" th:object="${policy}"
+      method="POST">
+
+    <!-- Add hidden form field to handle update -->
+    <input type="hidden" th:field="*{policyId}" />
+<!--    <input type="hidden" th:field="*{active}" />-->
+    <input type="hidden" th:field="*{policyHolder}" />
+
+    <input type="text" th:field="*{number}" style="width:250px" class="form-control mb-4 col-4">
+
+<!--    <select th:field="*{policyType}" style="width:250px" class="form-control mb-4 col-4">-->
+<!--        <option th:each="policyType : ${T(com.ana.PrivateInsurancePortfolio.model.PolicyType).values()}"-->
+<!--                th:value="${policyType}"-->
+<!--                th:text="${policyType}">-->
+<!--        </option>-->
+<!--    </select>-->
+
+    <select th:field="*{objectType}" style="width:250px" class="form-control mb-4 col-4">
+        <option th:each="objectType : ${T(com.ana.PrivateInsurancePortfolio.model.ObjectType).values()}"
+                th:value="${objectType}"
+                th:text="${objectType}">
+        </option>
+    </select>
+
+    <select th:field="*{status}" style="width:250px" class="form-control mb-4 col-4">
+        <option th:each="status : ${T(com.ana.PrivateInsurancePortfolio.model.PolicyStatus).values()}"
+                th:value="${status}"
+                th:text="${status}">
+        </option>
+    </select>
+
+
+    <input type="date" th:field="*{startDate}" style="width:250px" class="form-control mb-4 col-4">
+
+    <input type="date" th:field="*{endDate}" style="width:250px" class="form-control mb-4 col-4">
+
+    <input type="number" th:field="*{premium}" style="width:250px" class="form-control mb-4 col-4">
+
+    <input type="number" th:field="*{noOfInstallments}" style="width:250px" class="form-control mb-4 col-4">
+
+    <select th:field="*{policyPaymentStatus}" style="width:250px" class="form-control mb-4 col-4">
+        <option th:each="policyPaymentStatus : ${T(com.ana.PrivateInsurancePortfolio.model.PaymentStatus).values()}"
+                th:value="${policyPaymentStatus}"
+                th:text="${policyPaymentStatus}">
+        </option>
+    </select>
+
+    <input type="number" th:field="*{sumInsured}" style="width:250px" class="form-control mb-4 col-4">
+
+    <button type="submit" class="btn btn-info col-2">Update Property</button>
+</form>
+
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>

@@ -5,6 +5,7 @@
     <title>Private Insurance portfolio</title>
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 </head>
 <body>
 <div th:replace="fragments/header :: header">Header</div>
@@ -18,6 +19,7 @@
         <th>End date</th>
         <th>Premium</th>
         <th>Insured objects</th>
+        <th>Change</th>
     </tr>
     <tr th:each = "policy : ${policies}">
         <td th:text="${policy.number}">1</td>
@@ -37,6 +39,9 @@
                 </div>
             </span>
         </td>
+        <td><a th:href="@{updatePolicy/{id}(id=${policy.policyId})}" class="btn btn-warning"><i class="far fa-edit"></i></a>
+            <a th:href="@{deletePolicy/{id}(id=${policy.policyId})}" class="btn btn-danger"><i class="far fa-trash-alt"></i></a></td>
+
     </tr>
 </table>
 </body>
