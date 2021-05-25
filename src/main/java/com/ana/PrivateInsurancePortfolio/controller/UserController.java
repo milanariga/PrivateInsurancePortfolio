@@ -3,6 +3,7 @@ package com.ana.PrivateInsurancePortfolio.controller;
 import com.ana.PrivateInsurancePortfolio.model.SystemUser;
 import com.ana.PrivateInsurancePortfolio.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
 
     @GetMapping("/register")
     public String register(){
@@ -29,6 +31,7 @@ public class UserController {
             return "register";
         }
 
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         user.setActive(true);
         userRepository.save(user);
         System.out.println(user.toString());

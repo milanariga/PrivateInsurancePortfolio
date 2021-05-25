@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,13 +23,15 @@ public class PrivateInsurancePortfolioApplication {
 	CommandLineRunner commandLineRunner(UserRepository userRepository,
 										VehicleService vehicleService,
 										PropertyRepository propertyRepository,
-										PolicyRepository policyRepository){
+										PolicyRepository policyRepository,
+										BCryptPasswordEncoder bCryptPasswordEncoder){
 		return args -> {
+			String encodedPass = bCryptPasswordEncoder.encode("a");
 			SystemUser jake = new SystemUser(
 					"Jake",
 					"Brown",
 					"a",
-					"a",
+					encodedPass,
 					"test@test.com",
 					"+37122222222", true);
 			userRepository.save(jake);
@@ -56,11 +59,12 @@ public class PrivateInsurancePortfolioApplication {
 			jake.addVehicle(car);
 			jake.addVehicle(tractor);
 
+			String encodedPass2 = bCryptPasswordEncoder.encode("s");
 			SystemUser mad = new SystemUser(
 					"Mady",
 					"Lake",
 					"s",
-					"s",
+					encodedPass2,
 					"mady@test.com",
 					"+37155555555", true);
 			userRepository.save(mad);
@@ -100,11 +104,11 @@ public class PrivateInsurancePortfolioApplication {
 
 			jake.addProperty(testProperty);
 
-			String pattern = "yyyy-MM-dd";
+			String pattern = "MM/dd/yyyy";
         	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        	Date startDate = simpleDateFormat.parse("2020-5-20");
-        	Date endDate = simpleDateFormat.parse("2021-05-19");
-        	Date paymDate = simpleDateFormat.parse("2020-06-01");
+        	Date startDate = simpleDateFormat.parse("5/20/2020");
+        	Date endDate = simpleDateFormat.parse("5/19/2021");
+        	Date paymDate = simpleDateFormat.parse("6/1/2020");
 
 			Policy mtplPolicy = new Policy(
 					"SDA1234",
