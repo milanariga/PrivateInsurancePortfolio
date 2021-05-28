@@ -8,15 +8,45 @@
   <body>
   <div th:replace="fragments/header :: header"/>
     <h1>User registration</h1>
-    <span th:if="${param.message} != null" th:text="${message}">
-        Invalid data
-    </span>
-    <form th:action="@{/register}" method="post">
-        <div><label> First Name : <input type="text" name="firstName"/> </label></div>
-        <div><label> Last Name: <input type="text" name="lastName"/> </label></div>
-        <div><label> Username: <input type="text" name="username"/> </label></div>
-        <div><label> Password: <input type="password" name="password"/> </label></div>
-        <div><label> Email: <input type="email" name="email"/> </label></div>
+    <form th:action="@{/register}" th:object="${user}" method="post">
+        <div class="form-group row">
+            <label for="firstName" class="col-sm-1 col-form-label">First Name</label>
+            <div class="col-xs-2">
+                <input type="text" class="form-control" th:field="*{firstName}" id="firstName" name="firstName">
+            </div>
+            <div class="alert alert-warning" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Example</div>
+
+        </div>
+        <div class="form-group row">
+            <label for="lastName" class="col-sm-1 col-form-label">Last Name</label>
+            <div class="col-xs-2">
+                <input type="text" class="form-control" th:field="*{lastName}" id="lastName" name="lastName">
+            </div>
+            <div class="alert alert-warning" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Example</div>
+
+        </div>
+        <div class="form-group row">
+            <label for="username" class="col-sm-1 col-form-label">Username</label>
+            <div class="col-xs-2">
+                <input type="text" class="form-control" id="username" name="username">
+            </div>
+            <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Example</div>
+        </div>
+        <div class="form-group row">
+            <label for="password" class="col-sm-1 col-form-label">Password</label>
+            <div class="col-xs-2">
+                <input type="password" class="form-control" id="password" name="password">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="email" class="col-sm-1 col-form-label">Email</label>
+            <div class="col-xs-2">
+                <input type="email" class="form-control" id="email" name="email">
+            </div>
+            <div class="alert alert-warning" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Example</div>
+
+        </div>
+
         <div><input class="btn btn-large btn-success" type="submit" value="Register"/></div>
 
     </form>

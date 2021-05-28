@@ -1,6 +1,7 @@
 package com.ana.PrivateInsurancePortfolio.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,6 +37,8 @@ public class SystemUser {
             nullable = false,
             columnDefinition = "VARCHAR(50)"
     )
+    @NotNull
+    @Size(min = 2, message = "Name should be at least 2 characters long")
     private String firstName;
 
     @Column(
@@ -43,6 +46,8 @@ public class SystemUser {
             nullable = false,
             columnDefinition = "VARCHAR(100)"
     )
+    @NotNull
+    @Size(min = 2, message = "Surname should be at least 2 characters long")
     private String lastName;
 
     @Column(
@@ -50,18 +55,26 @@ public class SystemUser {
             nullable = false,
             columnDefinition = "VARCHAR(100)"
     )
+    @NotNull
+    @Size(min = 2, message = "Username should be at least 2 characters long")
     private String username;
+
     @Column(
             name = "password",
             nullable = false,
             columnDefinition = "VARCHAR(100)"
     )
+    @NotNull
+    //@Pattern(regexp = "(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])")
     private String password;
+
     @Column(
             name = "email",
             nullable = false,
             columnDefinition = "VARCHAR(100)"
     )
+    @NotEmpty(message = "Email is required")
+    @Email
     private String email;
     @Column(
             name = "mobile",

@@ -5,9 +5,14 @@ import com.ana.PrivateInsurancePortfolio.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
@@ -18,18 +23,24 @@ public class UserController {
 
 
     @GetMapping("/register")
-    public String register(){
+    public String register(Model model){
+        model.addAttribute("user", new SystemUser());
         return "register";
     }
 
     @PostMapping("/register")
-    public String registerSystemUser(SystemUser user, Map<String, Object> model){
+    public String registerSystemUser(@Valid @ModelAttribute("user") SystemUser user, BindingResult bindingResult){
+
+        if (bindingResult.hasErrors()) {
+            return "register";
+        }
         SystemUser userFromDb = userRepository.findByUsername(user.getUsername());
 
         if (userFromDb != null){
-            model.put("message", "User already exists! Choose different login");
+            //model.put("message", "User already exists! Choose different login");
             return "register";
         }
+
 
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         user.setActive(true);

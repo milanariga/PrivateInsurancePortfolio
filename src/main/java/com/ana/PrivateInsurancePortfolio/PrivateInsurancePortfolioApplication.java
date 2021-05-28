@@ -30,7 +30,7 @@ public class PrivateInsurancePortfolioApplication {
 			SystemUser jake = new SystemUser(
 					"Jake",
 					"Brown",
-					"a",
+					"aa",
 					encodedPass,
 					"test@test.com",
 					"+37122222222", true);
@@ -63,7 +63,7 @@ public class PrivateInsurancePortfolioApplication {
 			SystemUser mad = new SystemUser(
 					"Mady",
 					"Lake",
-					"s",
+					"ss",
 					encodedPass2,
 					"mady@test.com",
 					"+37155555555", true);
