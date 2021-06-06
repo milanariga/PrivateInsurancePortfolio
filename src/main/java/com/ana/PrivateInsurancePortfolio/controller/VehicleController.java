@@ -35,8 +35,8 @@ public class VehicleController {
     }
 
     @PostMapping("/saveVehicle")
-    public String saveVehicle(@ModelAttribute("vehicle") Vehicle vehicle){
-        vehicleService.saveNewVehicle(vehicle);
+    public String saveVehicle(@ModelAttribute("vehicle") Vehicle vehicle) {
+        vehicleService.saveVehicle(vehicle);
         return "redirect:/vehicles";
     }
 

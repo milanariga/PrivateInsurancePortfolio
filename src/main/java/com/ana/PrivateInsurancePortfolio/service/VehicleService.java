@@ -41,26 +41,32 @@ public class VehicleService {
         vehicleRepository.save(veh);
     }
 
-    public void saveVehicle(Vehicle vehicle){
-        vehicleRepository.save(vehicle);
-    }
+//    public void saveVehicle(Vehicle vehicle){
+//        vehicleRepository.save(vehicle);
+//    }
 
-    public void saveNewVehicle(Vehicle vehicle){
+    public boolean saveVehicle(Vehicle vehicle){
         String username = "";
-        if (vehicle.getOwner() == null) {
+        if (vehicle.getOwner() == null){
             Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             if (principal instanceof UserDetails) {
                 username = ((UserDetails) principal).getUsername();
             } else {
                 username = principal.toString();
             }
+            SystemUser owner = userService.findByUsername(username);
+            vehicle.setOwner(owner);
         }
-        SystemUser owner = userService.findByUsername(username);
-        vehicle.setOwner(owner);
+
         vehicleRepository.save(vehicle);
+        return true;
     }
 
     public Vehicle findById(Long id){
         return vehicleRepository.getOne(id);
+    }
+
+    public Vehicle findByRegNo(String regNo) {
+        return vehicleRepository.findByRegNo(regNo);
     }
 }
