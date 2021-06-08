@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
+
 @Controller
 public class VehicleController {
 
@@ -22,9 +24,13 @@ public class VehicleController {
     }
 
     @GetMapping("/deleteVehicle/{id}")
-    public String deleteVehicle(@PathVariable("id") Long id){
-        vehicleService.deleteVehicle(id);
-        return "redirect:/vehicles";
+    public String deleteVehicle(@PathVariable("id") Long id) throws SQLException {
+        Long returnId = vehicleService.deleteVehicle(id);
+        if (returnId == id) {
+            return "redirect:/vehicles";
+        } else {
+            return "errors/error";
+        }
     }
 
     @GetMapping("/addVehicle")

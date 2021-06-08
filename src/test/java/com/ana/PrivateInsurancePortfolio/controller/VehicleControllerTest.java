@@ -3,26 +3,18 @@ package com.ana.PrivateInsurancePortfolio.controller;
 import com.ana.PrivateInsurancePortfolio.model.SystemUser;
 import com.ana.PrivateInsurancePortfolio.model.Vehicle;
 import com.ana.PrivateInsurancePortfolio.model.VehicleType;
-import com.ana.PrivateInsurancePortfolio.service.UserService;
 import com.ana.PrivateInsurancePortfolio.service.VehicleService;
-import org.aspectj.lang.annotation.Before;
-import org.checkerframework.checker.fenum.qual.AwtAlphaCompositingRule;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.postgresql.util.PSQLException;
-import org.postgresql.util.ServerErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.util.Assert;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class VehicleControllerTest {
@@ -33,16 +25,14 @@ class VehicleControllerTest {
     @Mock
     VehicleService vehicleService;
 
-    @Mock
-    UserService userService;
-
-    @Autowired
-    VehicleController vehicleController;
-
-//    @Before
-//    public void setup(){
-//        VehicleController vehicleController = new VehicleController();
+//    @BeforeEach
+//    void setup(){
+//        SystemUser user = new SystemUser();
+//        Vehicle testVehicle = new Vehicle(VehicleType.TRACTOR, "Belarus", "312", 1999, "T543LA", "A54892", user);
+//
+//        VehicleController vehContr = new VehicleController(vehicleService);
 //    }
+
     @Test
     public void whenValidObjectShouldSaveToDB(){
 
@@ -106,10 +96,10 @@ class VehicleControllerTest {
     }
 
     @Test
-    public void whenDeleteVehicleSuccess(){
+    public void whenDeleteVehicleSuccess() throws SQLException {
         Long testId = 1L;
 
-        Mockito.doNothing().when(vehicleService).deleteVehicle(testId);
+        Mockito.when(vehicleService.deleteVehicle(testId)).thenReturn(testId);
 
         VehicleController vehContr = new VehicleController(vehicleService);
         vehContr.deleteVehicle(testId);
@@ -117,16 +107,15 @@ class VehicleControllerTest {
         Mockito.verify(vehicleService,Mockito.times(1)).deleteVehicle(testId);
     }
 
-//    @Test
-//    public void whenDeleteNotExistingVehicle() throws RuntimeException{
-//        Long testId = 1L;
-//
-//        Mockito.doThrow(new RuntimeException()).when(vehicleService).deleteVehicle(testId);
-//        //Mockito.when(vehicleService.deleteVehicle(testId)).thenThrow()
-//
-//        VehicleController vehContr = new VehicleController(vehicleService);
-//        vehContr.deleteVehicle(testId);
-//    }
+    @Test
+    public void whenDeleteNotExistingVehicleShouldThrowError() throws SQLException{
+        Long testId = 5L;
+
+        Mockito.when(vehicleService.deleteVehicle(testId)).thenThrow(new SQLException());
+
+        VehicleController vehContr = new VehicleController(vehicleService);
+        vehContr.deleteVehicle(testId);
+    }
 
 
 

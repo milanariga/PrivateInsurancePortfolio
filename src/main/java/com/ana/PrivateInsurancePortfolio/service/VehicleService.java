@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -35,10 +36,16 @@ public class VehicleService {
         return vehicleRepository.findByUserIdAndActiveTrue(owner, true);
     }
 
-    public void deleteVehicle(Long id){
+    public Long deleteVehicle(Long id) throws SQLException {
         Vehicle veh = vehicleRepository.getOne(id);
-        veh.setActive(false);
-        vehicleRepository.save(veh);
+        if (veh != null){
+            veh.setActive(false);
+            vehicleRepository.save(veh);
+            return veh.getVehicleId();
+        }
+        else{
+            throw new SQLException("No vehicle found");
+        }
     }
 
 //    public void saveVehicle(Vehicle vehicle){
@@ -66,7 +73,4 @@ public class VehicleService {
         return vehicleRepository.getOne(id);
     }
 
-    public Vehicle findByRegNo(String regNo) {
-        return vehicleRepository.findByRegNo(regNo);
-    }
 }
