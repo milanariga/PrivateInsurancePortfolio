@@ -1,5 +1,7 @@
 package com.ana.PrivateInsurancePortfolio.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -57,6 +59,7 @@ public class Policy {
             nullable = false,
             columnDefinition = "DATE"
     )
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date startDate;
 
     @Column(
@@ -64,6 +67,7 @@ public class Policy {
             nullable = false,
             columnDefinition = "DATE"
     )
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date endDate;
 
     @Column(
@@ -133,24 +137,28 @@ public class Policy {
         this.number = number;
     }
 
-    public String getPolicyType() {
-        switch (policyType) {
-            case MOTOR_THIRD_PARTY_LIABILITY:
-                return "MTPL";
-            case GENERAL_LIABILITY:
-                return "General Liability";
-            case PROPERTY_DAMAGE:
-                return "Property Insurance";
-            case ACCIDENT:
-                return "Accident Insurance";
-            case MOTOR_OWN_DAMAGE:
-                return "CASCO";
-            case TRAVEL:
-                return "Travel Insurance";
-            case LIFE_INSURANCE:
-                return "Life Insurance";
-            default: return "Unknown Policy Type";
-        }
+//    public String getPolicyType() {
+//        switch (policyType) {
+//            case MOTOR_THIRD_PARTY_LIABILITY:
+//                return "MTPL";
+//            case GENERAL_LIABILITY:
+//                return "General Liability";
+//            case PROPERTY_DAMAGE:
+//                return "Property Insurance";
+//            case ACCIDENT:
+//                return "Accident Insurance";
+//            case MOTOR_OWN_DAMAGE:
+//                return "CASCO";
+//            case TRAVEL:
+//                return "Travel Insurance";
+//            case LIFE_INSURANCE:
+//                return "Life Insurance";
+//            default: return "Unknown Policy Type";
+//        }
+//    }
+
+    public PolicyType getPolicyType(){
+        return policyType;
     }
 
     public void setPolicyType(PolicyType policyType) {

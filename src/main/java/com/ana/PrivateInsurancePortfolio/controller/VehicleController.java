@@ -24,7 +24,7 @@ public class VehicleController {
     }
 
     @GetMapping("/deleteVehicle/{id}")
-    public String deleteVehicle(@PathVariable("id") Long id) throws SQLException {
+    public String deleteVehicle(@PathVariable("id") Long id) throws Exception {
         Long returnId = vehicleService.deleteVehicle(id);
         if (returnId == id) {
             return "redirect:/vehicles";

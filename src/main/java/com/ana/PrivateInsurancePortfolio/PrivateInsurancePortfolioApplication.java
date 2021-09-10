@@ -104,11 +104,11 @@ public class PrivateInsurancePortfolioApplication {
 
 			jake.addProperty(testProperty);
 
-			String pattern = "MM/dd/yyyy";
+			String pattern = "yyyy-MM-dd";
         	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        	Date startDate = simpleDateFormat.parse("5/20/2020");
-        	Date endDate = simpleDateFormat.parse("5/19/2021");
-        	Date paymDate = simpleDateFormat.parse("6/1/2020");
+        	Date startDate = simpleDateFormat.parse("2020-09-20");
+        	Date endDate = simpleDateFormat.parse("2021-09-19");
+        	Date paymDate = simpleDateFormat.parse("2020-10-01");
 
 			Policy mtplPolicy = new Policy(
 					"SDA1234",

@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.sql.SQLException;
@@ -26,31 +27,37 @@ class VehicleServiceTest {
     private Authentication auth;
 
     @Mock
+    private SecurityContext securityContext;
+
+    @Mock
+    Object object;
+
+    @Mock
     VehicleRepository vehicleRepository;
 
     @Mock
     UserService userService;
 
 
-//    @Test
-//    public void shouldReturnListOfVehicles(){
-//        SystemUser user = new SystemUser("John", "Doe", "JonhDoe", "12345", "jd@jd.com", "123123123", true);
-//        Vehicle testVehicle1 = new Vehicle(VehicleType.TRACTOR, "Belarus", "312", 1999, "T543LA", "A54892", user);
-//        Vehicle testVehicle2 = new Vehicle(VehicleType.MOTORCYCLE, "Moto", "312", 1999, "T543LA", "A54892", user);
-//
-//        List<Vehicle> userVehicles = new ArrayList<>();
-//        userVehicles.add(testVehicle1);
-//        userVehicles.add(testVehicle2);
-//
-//        Mockito.when(auth.getPrincipal()).thenReturn(new Object());
-//
-//        Mockito.when(vehicleRepository.findByUserIdAndActiveTrue(user,true)).thenReturn(userVehicles);
-//
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//
-//        VehicleService vehService = new VehicleService(vehicleRepository, userService);
-//        vehService.findAllByActiveTrue();
-//    }
+    @Test
+    public void shouldReturnListOfVehicles(){
+        SystemUser user = new SystemUser("John", "Doe", "JonhDoe", "12345", "jd@jd.com", "123123123", true);
+        Vehicle testVehicle1 = new Vehicle(VehicleType.TRACTOR, "Belarus", "312", 1999, "T543LA", "A54892", user);
+        Vehicle testVehicle2 = new Vehicle(VehicleType.MOTORCYCLE, "Moto", "312", 1999, "T543LA", "A54892", user);
+
+        List<Vehicle> userVehicles = new ArrayList<>();
+        userVehicles.add(testVehicle1);
+        userVehicles.add(testVehicle2);
+
+        Mockito.when(securityContext.getAuthentication()).thenReturn(auth);
+        SecurityContextHolder.setContext(securityContext);
+
+        Mockito.when(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).thenReturn(object);
+
+
+        VehicleService vehService = new VehicleService(vehicleRepository, userService);
+        vehService.findAllByActiveTrue();
+    }
 
 
     //TODO save Vehicle
@@ -83,7 +90,7 @@ class VehicleServiceTest {
     }
 
     @Test
-    public void shouldCallRepositoryDeleteVehicle() throws SQLException {
+    public void shouldCallRepositoryDeleteVehicle() throws Exception {
         Long testId = 1L;
         SystemUser user = new SystemUser();
         Vehicle testVehicle1 = new Vehicle(VehicleType.TRACTOR, "Belarus", "312", 1999, "T543LA", "A54892", user);

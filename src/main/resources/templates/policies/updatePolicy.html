@@ -3,7 +3,7 @@
 <head>
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
-    <title>Property Update</title>
+    <title>Policy Update</title>
 </head>
 <body>
 <div th:replace="fragments/header :: header"/>
@@ -16,48 +16,103 @@
 <!--    <input type="hidden" th:field="*{active}" />-->
     <input type="hidden" th:field="*{policyHolder}" />
 
-    <input type="text" th:field="*{number}" style="width:250px" class="form-control mb-4 col-4">
+    <div class="form-group row">
+        <label for="number" class="col-sm-2 col-form-label">Policy number</label>
+        <div class="col-xs-3">
+            <input th:field="*{number}" style="width:250px" class="form-control mb-4 col-4" id="number">
+        </div>
+    </div>
 
-<!--    <select th:field="*{policyType}" style="width:250px" class="form-control mb-4 col-4">-->
-<!--        <option th:each="policyType : ${T(com.ana.PrivateInsurancePortfolio.model.PolicyType).values()}"-->
-<!--                th:value="${policyType}"-->
-<!--                th:text="${policyType}">-->
-<!--        </option>-->
-<!--    </select>-->
-
-    <select th:field="*{objectType}" style="width:250px" class="form-control mb-4 col-4">
-        <option th:each="objectType : ${T(com.ana.PrivateInsurancePortfolio.model.ObjectType).values()}"
-                th:value="${objectType}"
-                th:text="${objectType}">
-        </option>
-    </select>
-
-    <select th:field="*{status}" style="width:250px" class="form-control mb-4 col-4">
-        <option th:each="status : ${T(com.ana.PrivateInsurancePortfolio.model.PolicyStatus).values()}"
-                th:value="${status}"
-                th:text="${status}">
-        </option>
-    </select>
+    <div class="form-group row">
+        <label for="policyType" class="col-sm-2 col-form-label">Policy type</label>
+        <div class="col-xs-3">
+            <select th:field="*{policyType}" style="width:250px" id="policyType" class="form-control mb-4 col-4">
+                <option th:each="policyType : ${T(com.ana.PrivateInsurancePortfolio.model.PolicyType).values()}"
+                        th:value="${policyType}"
+                        th:text="${policyType}">
+                </option>
+            </select>
+        </div>
+    </div>
 
 
-    <input type="date" th:field="*{startDate}" style="width:250px" class="form-control mb-4 col-4">
+    <div class="form-group row">
+        <label for="objectType" class="col-sm-2 col-form-label">Insured object</label>
+        <div class="col-xs-3">
+            <select th:field="*{objectType}" style="width:250px" id="objectType" class="form-control mb-4 col-4">
+                <option th:each="objectType : ${T(com.ana.PrivateInsurancePortfolio.model.ObjectType).values()}"
+                        th:value="${objectType}"
+                        th:text="${objectType}">
+                </option>
+            </select>
+        </div>
+    </div>
 
-    <input type="date" th:field="*{endDate}" style="width:250px" class="form-control mb-4 col-4">
+    <div class="form-group row">
+        <label for="status" class="col-sm-2 col-form-label">Policy status</label>
+        <div class="col-xs-3">
+            <select th:field="*{status}" style="width:250px" id="status" class="form-control mb-4 col-4">
+                <option th:each="status : ${T(com.ana.PrivateInsurancePortfolio.model.PolicyStatus).values()}"
+                        th:value="${status}"
+                        th:text="${status}">
+                </option>
+            </select>
+        </div>
+    </div>
 
-    <input type="number" th:field="*{premium}" style="width:250px" class="form-control mb-4 col-4">
+    <div class="form-group row">
+        <label for="startDate" class="col-sm-2 col-form-label">Policy start date</label>
+        <div class="col-xs-3">
+            <input type="date" th:field="*{startDate}" th:value="${startDate}"
+                   style="width:250px" class="form-control mb-4 col-4" id="startDate">
+        </div>
+    </div>
 
-    <input type="number" th:field="*{noOfInstallments}" style="width:250px" class="form-control mb-4 col-4">
+    <div class="form-group row">
+        <label for="startDate" class="col-sm-2 col-form-label">Policy start date</label>
+        <div class="col-xs-3">
+            <input type="date" th:field="*{endDate}" th:value="${endDate}"
+                   style="width:250px" class="form-control mb-4 col-4" id="endDate">
+        </div>
+    </div>
 
-    <select th:field="*{policyPaymentStatus}" style="width:250px" class="form-control mb-4 col-4">
-        <option th:each="policyPaymentStatus : ${T(com.ana.PrivateInsurancePortfolio.model.PaymentStatus).values()}"
-                th:value="${policyPaymentStatus}"
-                th:text="${policyPaymentStatus}">
-        </option>
-    </select>
+    <div class="form-group row">
+        <label for="premium" class="col-sm-2 col-form-label">Policy premium, EUR</label>
+        <div class="col-xs-3">
+            <input type="number" th:field="*{premium}" style="width:250px" class="form-control mb-4 col-4" id="premium" min="0">
+        </div>
+    </div>
 
-    <input type="number" th:field="*{sumInsured}" style="width:250px" class="form-control mb-4 col-4">
+    <div class="form-group row">
+        <label for="noOfInstallments" class="col-sm-2 col-form-label">Number of payments</label>
+        <div class="col-xs-3">
+            <input type="number" th:field="*{noOfInstallments}" style="width:250px" class="form-control mb-4 col-4" id="noOfInstallments" min="0">
+        </div>
+    </div>
 
-    <button type="submit" class="btn btn-info col-2">Update Property</button>
+    <div class="form-group row">
+        <label for="paymStatus" class="col-sm-2 col-form-label">Policy payment status</label>
+        <div class="col-xs-3">
+            <select th:field="*{policyPaymentStatus}" style="width:250px" id="paymStatus" class="form-control mb-4 col-4">
+                <option th:each="policyPaymentStatus : ${T(com.ana.PrivateInsurancePortfolio.model.PaymentStatus).values()}"
+                        th:value="${policyPaymentStatus}"
+                        th:text="${policyPaymentStatus}">
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="sumInsured" class="col-sm-2 col-form-label">Sum insured, EUR</label>
+        <div class="col-xs-3">
+            <input type="number" th:field="*{sumInsured}" style="width:250px" class="form-control mb-4 col-4" id="sumInsured" min="0">
+        </div>
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-info col-2">Update Property</button>
+    </div>
+
 </form>
 
 <div th:replace="fragments/footer :: footer"/>

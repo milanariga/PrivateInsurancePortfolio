@@ -27,7 +27,6 @@
     <div class="form-group row">
         <label for="type" class="col-sm-2 col-form-label">Make</label>
         <div class="col-xs-3">
-<!--            <input type="text" class="form-control" id="type" placeholder="Make" name="type">-->
             <select type="text" class="form-control" id="type" placeholder="Make" name="type">
                 <option selected>Choose...</option>
                 <option th:each="type : ${T(com.ana.PrivateInsurancePortfolio.model.VehicleType).values()}"

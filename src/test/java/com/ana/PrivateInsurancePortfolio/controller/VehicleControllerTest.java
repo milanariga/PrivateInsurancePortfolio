@@ -25,19 +25,22 @@ class VehicleControllerTest {
     @Mock
     VehicleService vehicleService;
 
-//    @BeforeEach
-//    void setup(){
-//        SystemUser user = new SystemUser();
-//        Vehicle testVehicle = new Vehicle(VehicleType.TRACTOR, "Belarus", "312", 1999, "T543LA", "A54892", user);
-//
-//        VehicleController vehContr = new VehicleController(vehicleService);
-//    }
+    public SystemUser createUser(){
+        return new SystemUser();
+    }
+
+    public Vehicle createVehicle (){
+        return new Vehicle(VehicleType.TRACTOR, "Belarus", "312", 1999, "T543LA", "A54892", createUser());
+    }
+
+    public Vehicle createVehicle (VehicleType type, String make){
+        return new Vehicle(type, make, "312", 1999, "T543LA", "A54892", createUser());
+    }
+
 
     @Test
     public void whenValidObjectShouldSaveToDB(){
-
-        SystemUser user = new SystemUser();
-        Vehicle testVehicle = new Vehicle(VehicleType.TRACTOR, "Belarus", "312", 1999, "T543LA", "A54892", user);
+        Vehicle testVehicle = createVehicle();
 
         Mockito.when(vehicleService.saveVehicle(testVehicle)).thenReturn(true);
 
@@ -51,10 +54,9 @@ class VehicleControllerTest {
     @Test
     public void whenErrorOfDBShouldReturnError() throws RuntimeException{
 
-        SystemUser user = new SystemUser();
-        Vehicle testVehicle = new Vehicle(VehicleType.TRACTOR, "Belarus", "312", 1999, "T543LA", "A54892", user);
+        Vehicle testVehicle = createVehicle();
 
-         Mockito.when(vehicleService.saveVehicle(testVehicle)).thenReturn(true).thenThrow(new RuntimeException());
+        Mockito.when(vehicleService.saveVehicle(testVehicle)).thenReturn(true).thenThrow(new RuntimeException());
 
         VehicleController vehContr = new VehicleController(vehicleService);
         vehContr.saveVehicle(testVehicle);
@@ -96,7 +98,7 @@ class VehicleControllerTest {
     }
 
     @Test
-    public void whenDeleteVehicleSuccess() throws SQLException {
+    public void whenDeleteVehicleSuccess() throws Exception {
         Long testId = 1L;
 
         Mockito.when(vehicleService.deleteVehicle(testId)).thenReturn(testId);
@@ -108,15 +110,17 @@ class VehicleControllerTest {
     }
 
     @Test
-    public void whenDeleteNotExistingVehicleShouldThrowError() throws SQLException{
+    public void whenDeleteNotExistingVehicleShouldThrowError() throws Exception{
         Long testId = 5L;
 
-        Mockito.when(vehicleService.deleteVehicle(testId)).thenThrow(new SQLException());
+        Mockito.when(vehicleService.deleteVehicle(testId)).thenReturn(testId).thenThrow(new SQLException());
 
         VehicleController vehContr = new VehicleController(vehicleService);
         vehContr.deleteVehicle(testId);
     }
 
+
+    //TODO Update vehicle
 
 
 }

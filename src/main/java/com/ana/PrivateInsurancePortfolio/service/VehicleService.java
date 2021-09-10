@@ -36,7 +36,7 @@ public class VehicleService {
         return vehicleRepository.findByUserIdAndActiveTrue(owner, true);
     }
 
-    public Long deleteVehicle(Long id) throws SQLException {
+    public Long deleteVehicle(Long id) throws Exception { //create new Exception like VehicleNotFoundException
         Vehicle veh = vehicleRepository.getOne(id);
         if (veh != null){
             veh.setActive(false);
@@ -44,7 +44,7 @@ public class VehicleService {
             return veh.getVehicleId();
         }
         else{
-            throw new SQLException("No vehicle found");
+            throw new Exception("No vehicle found");
         }
     }
 
@@ -52,7 +52,7 @@ public class VehicleService {
 //        vehicleRepository.save(vehicle);
 //    }
 
-    public boolean saveVehicle(Vehicle vehicle){
+    public boolean saveVehicle(Vehicle vehicle){ //return Exception (create specific)
         String username = "";
         if (vehicle.getOwner() == null){
             Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
